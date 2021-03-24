@@ -3,15 +3,46 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
     <groupId>org.example</groupId>
     <artifactId>MultipleModules</artifactId>
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
+
     <modules>
         <module>SpeedDate</module>
         <module>BankApp</module>
+        <module>JavaLabs</module>
     </modules>
 
+    <!-- Hieronder kun je ook variabelen declareren welke ook voor onderliggende poms beschikbaar zijn -->
+    <properties>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+        <maven.compiler.release>11</maven.compiler.release>
+        <!-- Variables -->
+    </properties>
 
+    <!-- Worden hier nog niet binnengehaald. <groupId> en <artifactId> bij <dependencies> noemen in onderliggende pom-->
+    <dependencyManagement>
+        <dependencies>
+            <!-- Testing -->
+            <!-- Voor de JUnit5 test, 1 dependency, 3 benodigde dependencies zitten hierin -->
+            <dependency>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter-engine</artifactId>
+                <version>5.7.0</version>
+                <scope>test</scope>
+            </dependency>
+
+            <!-- Logging (+ nog een log4j2.xml bestand onder main-resources plaatsen voor configuratie
+            2 dependencies nodig, maar org.slf4j slf4j-api zit al in deze dependency
+            Dit is een implementatie van de api. Je kunt dus ook een andere kiezen-->
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-slf4j-impl</artifactId>
+                <version>2.11.2</version>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
 </project>
