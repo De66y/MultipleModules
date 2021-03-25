@@ -6,12 +6,16 @@
         [%t]:           Ik denk de thread
         %c{1}:          Naam van de Logger die gebruikt is (of de classnaam.class als je die oproept)
         %msg%n:         Bericht. Ik weet niet wat %n betekent
+        %C              Classpath vanaf je blauwe java map.
+        %l              Link naar de plek waar er gelogd wordt met path vanaf blauwe java map.
+        %M              Method
         Origineel:      [ %-5level] %d{yyyy-MM-dd HH:mm:ss} [%t] %c{1} - %msg%n"
-        Ander idee:     "%highlight{%d{HH:mm:ss.SSS} %-5level %logger{36}.%M() - %msg%n}{FATAL=red blink, ERROR=red, WARN=yellow bold, INFO=red, DEBUG=green bold, TRACE=blue}"-->
-        <property name="logpatternConsole">%highlight{[ %-5level] %d{yyyy-MM-dd HH:mm:ss} [%t] - %logger{}.%C.%M() -- %msg%n}{INFO= blue}"</property>
-        <property name="logpatternFile">[ %-5level] %d{yyyy-MM-dd HH:mm:ss} [%t] - %logger{}.%C.%M() -- %msg%n"</property>
+        Ander idee:     "%highlight{%d{HH:mm:ss.SSS} %-5level %puzzle.logger{36}.%M() - %msg%n}{FATAL=red blink, ERROR=red, WARN=yellow bold, INFO=red, DEBUG=green bold, TRACE=blue}"-->
+        <property name="logpatternConsole">%highlight{[%-5level] %d{yyyy-MM-dd HH:mm:ss} [%t] - %l.%M() -- %msg%n}{DEBUG= dark blue, INFO= yellow, WARN= red, ERROR= red, FATAL= red bold}</property>
+        <property name="logpatternFile">[%-5level] %d{yyyy-MM-dd HH:mm:ss} [%t] - %L.%C.%M() -- %msg%n</property>
     </Properties>
 
+    <!-- used to publish the logging information to the destination like file, database, console etc-->
     <Appenders>
         <Console name="console" target="SYSTEM_OUT">
             <PatternLayout pattern="${logpatternConsole}"/>
@@ -30,13 +34,12 @@
     </Appenders>
 
     <Loggers>
-        <Logger name="infoLogger" level="INFO">
+        <!--<Logger name="puzzle.logger" level="ALL">
+            <AppenderRef ref="rollingFile" level="trace"/>
+        </Logger> -->
+
+        <Root level="DEBUG">
             <AppenderRef ref="console"/>
-        </Logger>
-
-
-
-        <Root level="ALL">
             <AppenderRef ref="rollingFile"/>
         </Root>
 
