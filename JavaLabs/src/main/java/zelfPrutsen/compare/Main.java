@@ -1,4 +1,4 @@
-package puzzle.compare;
+package zelfPrutsen.compare;
 
 public class Main {
 

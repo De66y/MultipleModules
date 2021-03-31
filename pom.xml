@@ -20,17 +20,22 @@
         <maven.compiler.target>11</maven.compiler.target>
         <maven.compiler.release>11</maven.compiler.release>
 
-        <!-- Variables -->
+        <!-- VARIABLES -->
         <pitest.maven.version>1.4.2</pitest.maven.version>
         <pitest.junit5.plugin.version>0.12</pitest.junit5.plugin.version>
         <junit.jupiter.engine.version>5.7.0</junit.jupiter.engine.version>
         <log4j.slf4j.impl.version>2.11.2</log4j.slf4j.impl.version>
+        <mockito.core.version>3.5.15</mockito.core.version>
+        <mockito.junit.jupiter.version>3.5.15</mockito.junit.jupiter.version>
+        <maven.surefire.plugin.version>2.22.2</maven.surefire.plugin.version>
+        <pitest.maven.version>1.5.2</pitest.maven.version>
+        <pitest.junit5.plugin.version>0.9</pitest.junit5.plugin.version>
     </properties>
 
     <!-- Worden hier nog niet binnengehaald. <groupId> en <artifactId> bij <dependencies> noemen in onderliggende pom-->
     <dependencyManagement>
         <dependencies>
-            <!-- Testing -->
+            <!-- TESTING -->
             <!-- Voor de JUnit5 test, 1 dependency, 3 benodigde dependencies zitten hierin -->
             <dependency>
                 <groupId>org.junit.jupiter</groupId>
@@ -39,7 +44,26 @@
                 <scope>test</scope>
             </dependency>
 
-            <!-- Logging (+ nog een log4j2.xml bestand onder main-resources plaatsen voor configuratie
+            <!-- Mockito, je mag ipv deze ook mockito-all pakken maar deze heeft voldoende functionaliteiten -->
+            <dependency>
+                <groupId>org.mockito</groupId>
+                <artifactId>mockito-core</artifactId>
+                <version>${mockito.core.version}</version>
+                <scope>test</scope>
+            </dependency>
+
+            <!-- Samenwerking tussen mockito en JUnit5 -->
+            <dependency>
+                <groupId>org.mockito</groupId>
+                <artifactId>mockito-junit-jupiter</artifactId>
+                <version>${mockito.junit.jupiter.version}</version> <!-- Dezelfde versie als mockito.core zorgde ervoor dat het werkt -->
+                <scope>test</scope>
+            </dependency>
+
+
+
+            <!-- LOGGING -->
+            <!--(+ nog een log4j2.xml bestand onder main-resources plaatsen voor configuratie
             2 dependencies nodig, maar org.slf4j slf4j-api zit al in deze dependency
             Dit is een implementatie van de api. Je kunt dus ook een andere kiezen-->
             <dependency>
@@ -50,5 +74,49 @@
 
         </dependencies>
     </dependencyManagement>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <!-- Surefire version updaten -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>${maven.surefire.plugin.version}</version>
+                </plugin>
+
+                <!-- Pitest -->
+                <plugin>
+                    <groupId>org.pitest</groupId>
+                    <artifactId>pitest-maven</artifactId>
+                    <version>${pitest.maven.version}</version>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>mutationCoverage</goal> <!-- Tijdens de testphase (zelf aangegeven) wordt van de -->
+                            </goals>                          <!-- pitest plugin deze goal automatisch aangeroepen -->
+                            <phase>test</phase>
+                        </execution>
+                    </executions>
+                    <configuration>
+                        <targetClasses>
+                            <param>centralBank*</param> <!-- Zelf de map aangeven -->
+                        </targetClasses>
+                        <targetTests>
+                            <param>centralBank*</param> <!-- Zelf de map aangeven -->
+                        </targetTests>
+                    </configuration>
+                    <!-- Deze dependency moet hier staan. Voor de samenwerking met JUnit5 -->
+                    <dependencies>
+                        <dependency>
+                            <groupId>org.pitest</groupId>
+                            <artifactId>pitest-junit5-plugin</artifactId>
+                            <version>${pitest.junit5.plugin.version}</version>
+                        </dependency>
+                    </dependencies>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
 
 </project>

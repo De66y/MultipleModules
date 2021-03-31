@@ -1,4 +1,4 @@
-package puzzle.logger;
+package zelfPrutsen.logger;
 
 public class Main {
 
