@@ -11,7 +11,8 @@
     <modules>
         <module>SpeedDate</module>
         <module>BankApp</module>
-        <module>JavaLabs</module>
+        <module>Blok1Java</module>
+        <module>Blok2Database</module>
     </modules>
 
     <!-- Hieronder kun je ook variabelen declareren welke ook voor onderliggende poms beschikbaar zijn -->
@@ -19,6 +20,9 @@
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
         <maven.compiler.release>11</maven.compiler.release>
+
+        <!-- Warning: Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent! -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <!-- VARIABLES -->
         <pitest.maven.version>1.4.2</pitest.maven.version>
