@@ -21,7 +21,7 @@
     </dependencies>
 
 
-    <!-- Pitest plugin -->
+    <!-- Surfire update + Pitest plugin -->
     <build>
         <plugins>
             <plugin>

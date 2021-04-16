@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="INFO">
+
+    <Properties>
+        <property name="logpatternConsole">%highlight{[%-5level] %d{yyyy-MM-dd HH:mm:ss} [%t] - %l.%M() -- %msg%n}{DEBUG= dark blue, INFO= yellow, WARN= red, ERROR= red, FATAL= red bold}</property>
+        <property name="logpatternFile">[%-5level] %d{yyyy-MM-dd HH:mm:ss} [%t] - %L.%C.%M() -- %msg%n</property>
+    </Properties>
+
+    <Appenders>
+        <Console name="console" target="SYSTEM_OUT">
+            <PatternLayout pattern="${logpatternConsole}"/>
+        </Console>
+
+        <RollingFile name="rollingFile" append="false" fileName="logs/error.log" filePattern="logs/error-%d{yyyy-MM-dd}.%i.log">
+            <PatternLayout pattern="${logpatternFile}"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+                <SizeBasedTriggeringPolicy size="2 KB"/>
+            </Policies>
+        </RollingFile>
+    </Appenders>
+
+    <Loggers>
+        <Root level="DEBUG">
+            <AppenderRef ref="console"/>
+            <AppenderRef ref="rollingFile"/>
+        </Root>
+
+    </Loggers>
+</Configuration>

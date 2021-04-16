@@ -13,6 +13,7 @@
         <module>BankApp</module>
         <module>Blok1Java</module>
         <module>Blok2Database</module>
+        <module>CaseOne</module>
     </modules>
 
     <!-- Hieronder kun je ook variabelen declareren welke ook voor onderliggende poms beschikbaar zijn -->
@@ -34,6 +35,9 @@
         <maven.surefire.plugin.version>2.22.2</maven.surefire.plugin.version>
         <pitest.maven.version>1.5.2</pitest.maven.version>
         <pitest.junit5.plugin.version>0.9</pitest.junit5.plugin.version>
+        <mysql.connector.java.version>8.0.16</mysql.connector.java.version>
+        <hibernate.entitymanager.verson>5.4.17.Final</hibernate.entitymanager.verson>
+        <lomobck.version>1.18.12</lomobck.version>
     </properties>
 
     <!-- Worden hier nog niet binnengehaald. <groupId> en <artifactId> bij <dependencies> noemen in onderliggende pom-->
@@ -76,8 +80,42 @@
                 <version>${log4j.slf4j.impl.version}</version>
             </dependency>
 
+
+
+            <!-- DATABASE, hibernate -->
+            <!-- We hebben ook de hibernate.core nodig maar die  zit al in deze dependency -->
+            <!-- Voor JDBC is dit de enige dependency -->
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql.connector.java.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-entitymanager</artifactId>
+                <version>${hibernate.entitymanager.verson}</version>
+            </dependency>
+
+
+
+            <!-- Lombock -->
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lomobck.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
+
+    <!-- Deze dependencies gelden voor het hele project -->
+    <dependencies>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+
+    </dependencies>
 
     <build>
         <pluginManagement>
@@ -104,10 +142,10 @@
                     </executions>
                     <configuration>
                         <targetClasses>
-                            <param>centralBank*</param> <!-- Zelf de map aangeven -->
+                            <param>speedDate*</param> <!-- Zelf de map aangeven -->
                         </targetClasses>
                         <targetTests>
-                            <param>centralBank*</param> <!-- Zelf de map aangeven -->
+                            <param>speedDate*</param> <!-- Zelf de map aangeven -->
                         </targetTests>
                     </configuration>
                     <!-- Deze dependency moet hier staan. Voor de samenwerking met JUnit5 -->

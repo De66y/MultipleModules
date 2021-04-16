@@ -1,11 +1,11 @@
-package com.boekenplaats.entity;
+package zelfPrutsen.boekenplaats.entity;
 
 import javax.persistence.*;
 
 public class TestSytem {
     //@PersistenceUnit(unitName = "Blok2Datebase")
     private static EntityManagerFactory ENTITY_MANAGER_FACTORY = Persistence
-            .createEntityManagerFactory("Blok2Database");
+            .createEntityManagerFactory("TestNaam");
 
     public static void main(String[] args) {
         addPerson("Jamie", "Fraiser");

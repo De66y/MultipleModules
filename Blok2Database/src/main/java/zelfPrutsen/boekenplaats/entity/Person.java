@@ -1,23 +1,28 @@
-package com.boekenplaats.entity;
+package zelfPrutsen.boekenplaats.entity;
 
 import javax.persistence.*;
 
 @Entity
-//@Table(name = "Person")
+@Table(name = "Person")
 public class Person {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int custID;
+    private int id;
     private String fname;
     private String lname;
+    @OneToOne
+    private Book book;
 
-    public int getCustID() {
-        return custID;
+    public Person() {
     }
 
-    public void setCustID(int custID) {
-        this.custID = custID;
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int custID) {
+        this.id = custID;
     }
 
     public String getFname() {
