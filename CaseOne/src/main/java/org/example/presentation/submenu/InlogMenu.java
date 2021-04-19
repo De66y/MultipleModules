@@ -1,25 +1,26 @@
 package org.example.presentation.submenu;
 
 import org.example.presentation.IMenu;
-import org.example.presentation.mainmenu.MainMenuSecond;
-import org.example.service.GebruikersService;
+import org.example.presentation.ISubMenu;
+import org.example.presentation.mainmenu.Hoofdmenu;
+import org.example.service.service.GebruikerService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class InlogMenu implements IMenu {
+public class InlogMenu implements IMenu, ISubMenu {
     private final Logger LOGGER = LoggerFactory.getLogger(InlogMenu.class);
-    private GebruikersService gebruikersService;
+    private GebruikerService gebruikerService;
 
-    public InlogMenu(GebruikersService gebruikersService) {
-        this.gebruikersService = gebruikersService;
+    public InlogMenu(GebruikerService gebruikerService) {
+        this.gebruikerService = gebruikerService;
     }
 
     public void showMenu(Scanner scanner) {
         int choice;
         try {
-            System.out.printf("U bent in het %s\n. Waarmee kan ik u van dienst zijn: \n" +
+            System.out.printf("U bent in het %s.\n Waarmee kan ik u van dienst zijn: \n" +
                     "1. ----- Inloggen UNDER CONSTRUCTION----- \n" +
                     "2. Afsluiten\n"
             ,this.getClass().getSimpleName());
@@ -29,7 +30,7 @@ public class InlogMenu implements IMenu {
 
             switch (choice) {
                 case 1:
-                    showInlogMenu(scanner);
+                    showSubMenu(scanner);
                     break;
                 case 2:
                     System.out.println("Tot de volgende keer :)");
@@ -39,27 +40,27 @@ public class InlogMenu implements IMenu {
 
             }
         } catch (InputMismatchException e) {
-            LOGGER.debug("InputMismatchException message: " + e.getMessage());
+            LOGGER.debug(e.getClass().getSimpleName() + " : " + e.getMessage());
             showMenu(new Scanner(System.in));
         }
 
     }
 
-    private void showInlogMenu(Scanner scanner) {
+    public void showSubMenu(Scanner scanner) {
         scanner = new Scanner(System.in);
-        System.out.print("Wat is uw gebruikersnaam: ");
+        System.out.print("Wat is uw emailadres: ");
         String username = scanner.nextLine();
 
         if(usernameExist(username)) {
             System.out.print("Wat is uw wachtwoord: ");
             String password = scanner.nextLine();
 
-            if(usernameAndPasswordExist(username, password)) new MainMenuSecond().showMenu(scanner);
+            if(usernameAndPasswordExist(username, password)) new Hoofdmenu().showMenu(scanner);
         }
     }
 
     private boolean usernameExist(String username) {
-        if (!gebruikersService.usernameExist(username)) {
+        if (!gebruikerService.emailadresBestaat(username)) {
             LOGGER.info("Gebruikersnaam is niet juist.");
             showMenu(new Scanner(System.in));
             return false;
@@ -68,7 +69,7 @@ public class InlogMenu implements IMenu {
     }
 
     private boolean usernameAndPasswordExist(String username, String password) {
-        if (!gebruikersService.usernameAndPasswordExist(username, password)) {
+        if (!gebruikerService.usernameAndPasswordExist(username, password)) {
             LOGGER.info("Wachtwoord is niet juist.");
             showMenu(new Scanner(System.in));
             return false;

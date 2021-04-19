@@ -1,11 +1,12 @@
 package jdbc;
 
 import java.sql.*;
+import static jdbc.DatabaseProperties.*;
 
 public class ConnectionDatabase {
-    private static final String URL = "jdbc:mysql://localhost/jdbcBooks?serverTimezone=UTC";
-    private static final String USERNAME = "root";
-    private static final String PASSWORD = "d3v3l0p3r";
+    private static final String URL = get("url");
+    private static final String USERNAME = get("gebruikersnaam");
+    private static final String PASSWORD = get("wachtwoord");
 
     public static Connection makeConnectionToDatabase() {
         Connection connection = null;

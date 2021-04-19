@@ -2,7 +2,7 @@ package jdbc;
 
 import java.sql.*;
 
-public class Queries {
+public class Transaction {
 
     //Standaard
     public static void selectAll(Connection connection) throws SQLException { //Deze throws voor de finally
@@ -16,7 +16,7 @@ public class Queries {
                 String a = result.getString("author");   //De input is de naam van de colum, in dit geval dus author
 
                 Book book = Book.builder()                  //Dit kan ik gebruiken door de lombok dependency
-                        .id(i).title(t).author(a).build();  //Dit zijn de fields van de  class Book
+                        .id(i).title(t).author(a).build();  //Dit zijn de fields van de  class BoekDAO
                 System.out.println(book);                   //Hetzelfde als: System.out.println(book.toString());
             }
 
@@ -48,7 +48,7 @@ public class Queries {
 
                 connection.commit(); //De query daadwerkelijk uitvoeren op de database
             } else {
-                System.out.printf("Book: %s -> doesn't exist", searchTitle);
+                System.out.printf("BoekDAO: %s -> doesn't exist", searchTitle);
             }
             //connection.commit();     Bij Bram stond dit hier
 
@@ -63,4 +63,6 @@ public class Queries {
             }
         }
     }
+
+    //Hier komt nog een extra method met de prepared statement. VEILIGER!!!
 }

@@ -1,14 +1,16 @@
 package org.example.presentation.mainmenu;
 
 import org.example.presentation.IMenu;
+import org.example.presentation.submenu.RegistreerMenu;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 //@TODO
-public class MainMenuSecond implements IMenu {
-    private final Logger LOGGER = LoggerFactory.getLogger(MainMenuSecond.class);
+public class Hoofdmenu implements IMenu {
+    private final Logger LOGGER = LoggerFactory.getLogger(Hoofdmenu.class);
+    private final String menuNaam = "Hoofdmenu";
 
     public void showMenu(Scanner scanner) {
         int choice;
@@ -21,7 +23,7 @@ public class MainMenuSecond implements IMenu {
                                 "2. UNDER CONSTRUCTION.\n" +
                                 "3. UNDER CONSTRUCTION.\n" +
                                 "4. Afsluiten.\n"
-                        , this.getClass().getSimpleName());
+                        , menuNaam);
                 System.out.print("Uw keuze: ");
 
                 choice = scanner.nextInt();
@@ -46,7 +48,7 @@ public class MainMenuSecond implements IMenu {
             } while (menuIsRunning);
 
         } catch (InputMismatchException e) {
-            LOGGER.debug("InputMismatchException message: " + e.getMessage());
+            LOGGER.debug(e.getClass().getSimpleName() + " : " + e.getMessage());
             showMenu(new Scanner(System.in));
         }
     }

@@ -15,19 +15,19 @@
         <property name="logpatternFile">[%-5level] %d{yyyy-MM-dd HH:mm:ss} [%t] - %L.%C.%M() -- %msg%n</property>
     </Properties>
 
-    <!-- used to publish the logging information to the destination like file, database, console etc-->
+    <!-- Used to publish the logging information to the destination like file, database, console etc-->
     <Appenders>
         <Console name="console" target="SYSTEM_OUT">
             <PatternLayout pattern="${logpatternConsole}"/>
         </Console>
 
-        <!-- append is false for test purposes so the logfiles are automatically overwritten. Don't use this on production. -->
+        <!-- Note van Bram's file  van InfoS: append is false for test purposes so the logfiles are automatically overwritten. Don't use this on production. -->
         <RollingFile name="rollingFile" append="false" fileName="logs/error.log" filePattern="logs/error-%d{yyyy-MM-dd}.%i.log">
             <PatternLayout pattern="${logpatternFile}"/>
             <Policies>
-                <!-- Rolling once a day -->
+                <!-- Note van Bram's file  van InfoS: Rolling once a day -->
                 <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
-                <!-- Rolling based on size -->
+                <!-- Note van Bram's file  van InfoS: Rolling based on size -->
                 <SizeBasedTriggeringPolicy size="2 KB"/>
             </Policies>
         </RollingFile>

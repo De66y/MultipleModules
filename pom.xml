@@ -36,7 +36,7 @@
         <pitest.maven.version>1.5.2</pitest.maven.version>
         <pitest.junit5.plugin.version>0.9</pitest.junit5.plugin.version>
         <mysql.connector.java.version>8.0.16</mysql.connector.java.version>
-        <hibernate.entitymanager.verson>5.4.17.Final</hibernate.entitymanager.verson>
+        <hibernate.core.version>5.4.23.Final</hibernate.core.version>
         <lomobck.version>1.18.12</lomobck.version>
     </properties>
 
@@ -71,7 +71,7 @@
 
 
             <!-- LOGGING -->
-            <!--(+ nog een log4j2.xml bestand onder main-resources plaatsen voor configuratie
+            <!--+ een log4j2.xml bestand onder main-resources plaatsen voor configuratie
             2 dependencies nodig, maar org.slf4j slf4j-api zit al in deze dependency
             Dit is een implementatie van de api. Je kunt dus ook een andere kiezen-->
             <dependency>
@@ -82,9 +82,9 @@
 
 
 
-            <!-- DATABASE, hibernate -->
-            <!-- We hebben ook de hibernate.core nodig maar die  zit al in deze dependency -->
-            <!-- Voor JDBC is dit de enige dependency -->
+            <!-- DATABASE JPA -->
+            <!-- + persistence.xml file in resources-META-INF -->
+            <!-- javax.persistance-api hebben we ook nodig maar zit al in hibernate-core -->
             <dependency>
                 <groupId>mysql</groupId>
                 <artifactId>mysql-connector-java</artifactId>
@@ -93,11 +93,9 @@
 
             <dependency>
                 <groupId>org.hibernate</groupId>
-                <artifactId>hibernate-entitymanager</artifactId>
-                <version>${hibernate.entitymanager.verson}</version>
+                <artifactId>hibernate-core</artifactId>
+                <version>${hibernate.core.version}</version>
             </dependency>
-
-
 
             <!-- Lombock -->
             <dependency>

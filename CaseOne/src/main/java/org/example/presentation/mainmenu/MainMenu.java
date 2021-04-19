@@ -1,18 +1,23 @@
 package org.example.presentation.mainmenu;
 
-import org.example.data.dao.KlantDao;
+import org.example.data.dao.GebruikerDAO;
 import org.example.presentation.IMenu;
 import org.example.presentation.submenu.RegistreerMenu;
-import org.example.service.GebruikersService;
+import org.example.service.service.GebruikerService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.example.presentation.submenu.InlogMenu;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class MainMenu implements IMenu {
+public class MainMenu implements  IMenu{
     private final static String COMPANYNAME = "MarktByPlaats";
     private final Logger LOGGER = LoggerFactory.getLogger(MainMenu.class);
+    private GebruikerService gebruikerService;
+
+    public MainMenu(GebruikerService gebruikerService) {
+        this.gebruikerService = gebruikerService;
+    }
 
     public void showMenu(Scanner scanner) {
         int choice;
@@ -31,13 +36,13 @@ public class MainMenu implements IMenu {
 
                 switch (choice) {
                     case 1:
-                        KlantDao klantDao = new KlantDao();
-                        klantDao.setUp();
-                        new InlogMenu(new GebruikersService(klantDao)).showMenu(scanner);
+                        GebruikerDAO gebruikerDAO = new GebruikerDAO();
+                        gebruikerDAO.setUp();
+                        new InlogMenu(new GebruikerService(gebruikerDAO)).showMenu(scanner);
                         break;
 
                     case 2:
-                        new RegistreerMenu().showMenu(scanner);
+                        new RegistreerMenu(gebruikerService).showMenu(scanner);
                         break;
 
                     case 3:
@@ -49,7 +54,7 @@ public class MainMenu implements IMenu {
                 }
             } while (mainMenuIsRunning);
         } catch (InputMismatchException e) {
-            LOGGER.debug("InputMismatchException message: " + e.getMessage());
+            LOGGER.debug(e.getClass().getSimpleName() + " : " + e.getMessage());
             showMenu(new Scanner(System.in));
         }
     }
