@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="INFO">
+
+    <Properties>
+        <!--%d default: {yyyy-MM-dd HH:mm:ss.SSS}
+        [%t]:           Ik denk de thread
+        %c{1}:          Naam van de Logger die gebruikt is (of de classnaam.class als je die oproept)
+        %msg%n:         Bericht. Ik weet niet wat %n betekent
+        %C              Classpath vanaf je blauwe java map.
+        %l              Link naar de plek waar er gelogd wordt met path vanaf blauwe java map.
+        %M              Method
+        Origineel:      [ %-5level] %d{yyyy-MM-dd HH:mm:ss} [%t] %c{1} - %msg%n"
+        Ander idee:     "%highlight{%d{HH:mm:ss.SSS} %-5level %zelfPrutsen.logger{36}.%M() - %msg%n}{FATAL=red blink, ERROR=red, WARN=yellow bold, INFO=red, DEBUG=green bold, TRACE=blue}"-->
+        <property name="logpatternConsole">%highlight{[%-5level] %d{yyyy-MM-dd HH:mm:ss} [%t] - %l.%M() -- %msg%n}{DEBUG= dark blue, INFO= yellow, WARN= red, ERROR= red, FATAL= red bold}</property>
+        <property name="logpatternFile">[%-5level] %d{yyyy-MM-dd HH:mm:ss} [%t] - %L.%C.%M() -- %msg%n</property>
+    </Properties>
+
+    <!-- Used to publish the logging information to the destination like file, database, console etc-->
+    <Appenders>
+        <Console name="console" target="SYSTEM_OUT">
+            <PatternLayout pattern="${logpatternConsole}"/>
+        </Console>
+
+        <!-- Note van Bram's file  van InfoS: append is false for test purposes so the logfiles are automatically overwritten. Don't use this on production. -->
+        <RollingFile name="rollingFile" append="false" fileName="logs/error.log" filePattern="logs/error-%d{yyyy-MM-dd}.%i.log">
+            <PatternLayout pattern="${logpatternFile}"/>
+            <Policies>
+                <!-- Note van Bram's file  van InfoS: Rolling once a day -->
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+                <!-- Note van Bram's file  van InfoS: Rolling based on size -->
+                <SizeBasedTriggeringPolicy size="2 KB"/>
+            </Policies>
+        </RollingFile>
+    </Appenders>
+
+    <Loggers>
+        <!--<Logger name="zelfPrutsen.logger" level="ALL">
+            <AppenderRef ref="rollingFile" level="trace"/>
+        </Logger> -->
+
+        <!--Hibernate gaat er vanuit dat er een logfile is, daarom maken we er hier een aan, niet verplicht -->
+        <Logger name="org.hibernate" level="INFO"/>
+        <!-- Note van Bram's file  van InfoS: to show binding parameter log statements:-->
+        <Logger name="org.hibernate.type.descriptor.sql" level="TRACE"/>
+
+
+        <Root level="DEBUG">
+            <AppenderRef ref="console"/>
+            <AppenderRef ref="rollingFile"/>
+        </Root>
+
+    </Loggers>
+</Configuration>
