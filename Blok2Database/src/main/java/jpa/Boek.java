@@ -1,16 +1,18 @@
 package jpa;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+
+@NamedQueries({
+        @NamedQuery(name= "BoekEntity.zoekAllen", query= "SELECT b FROM Boek b")
+})
 
 @Entity
 public class Boek {
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private int id;
 
     private String Titel;
     private String Auteur;
@@ -22,7 +24,7 @@ public class Boek {
         this.Auteur = Auteur;
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
     public String getTitel() {

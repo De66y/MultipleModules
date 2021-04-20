@@ -16,8 +16,8 @@ import java.util.List;
 @AllArgsConstructor @NoArgsConstructor
 @NamedQueries({
         @NamedQuery(name= "GebruikerEntity.zoekallen", query= "SELECT g FROM Gebruiker g"),
-        //@NamedQuery(name= "GebruikerEntity.zoekVolledigeGebruiker", query= "SELECT g FROM Gebruiker g WHERE g.gebruikersnaam=:gebruikersnaam AND g.wachtwoord=:wachtwoord")
-        @NamedQuery(name= "GebruikerEntity.zoekVolledigeGebruiker", query= "SELECT g FROM Gebruiker g WHERE g.gebruikersnaam= ?1 AND g.wachtwoord= ?2")
+        @NamedQuery(name= "GebruikerEntity.zoekVolledigeGebruiker", query= "SELECT g FROM Gebruiker g WHERE g.gebruikersnaam=:gebruikersnaam AND g.wachtwoord=:wachtwoord")
+
 })
 public class Gebruiker implements IGebruiker {
     @Id

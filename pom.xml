@@ -34,6 +34,7 @@
         <mockito.core.version>3.5.15</mockito.core.version>
         <mockito.junit.jupiter.version>3.5.15</mockito.junit.jupiter.version>
         <maven.surefire.plugin.version>2.22.2</maven.surefire.plugin.version>
+        <maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
         <pitest.maven.version>1.5.2</pitest.maven.version>
         <pitest.junit5.plugin.version>0.9</pitest.junit5.plugin.version>
         <mysql.connector.java.version>8.0.16</mysql.connector.java.version>
@@ -132,6 +133,12 @@
                     <artifactId>maven-surefire-plugin</artifactId>
                     <version>${maven.surefire.plugin.version}</version>
                 </plugin>
+                <!-- Compiler version updaten -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>${maven.compiler.plugin.version}</version>
+                </plugin>
 
                 <!-- Pitest -->
                 <plugin>
@@ -163,8 +170,41 @@
                         </dependency>
                     </dependencies>
                 </plugin>
+
+                <!-- Integratietesten worden nu automatisch afgevuurd na een maven build -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-failsafe-plugin</artifactId>
+                    <version>2.22.2</version>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>integration-test</goal>
+                                <goal>verify</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
             </plugins>
         </pluginManagement>
+
+        <!-- Deze plugins gelden voor het hele project in de <build> -->
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+            </plugin>
+        </plugins>
     </build>
+
+
 
 </project>

@@ -9,12 +9,27 @@ public class JpaApp {
 
     public static void main(String[] args) {
         BoekDAO boekDAO = new BoekDAO(em);
+
+        //Opslaan werkt
         //new BoekDAO(em).opslaan(new Boek("Strange the Dreamer", "L. Taylor"));
         //new BoekDAO(em).opslaan(new Boek("Outlander", "D. Gabaldon"));
         //new BoekDAO(em).opslaan(new Boek("A Court of Thorns and Roses", "Sarah J. Maas"));
-        System.out.println(boekDAO.zoek(1));
 
-        System.out.println(boekDAO.alleBoekenLijst());
+        //Zoek werkt
+        //System.out.println(boekDAO.zoek(1));
+
+        //Alle boeken printen werkt
+        //System.out.println(boekDAO.alleBoekenLijst());
+
+        //Verwijderen werkt
+        //boekDAO.verwijderen(3);
+
+        //Updaten werkt
+        //new BoekDAO(em).opslaan(new Boek("Lord Rings", "J.R.R. Tolkien"));
+        //System.out.println(boekDAO.alleBoekenLijst());
+        //boekDAO.updateTitel(5, "Lord of the Rings");
+        //System.out.println(boekDAO.alleBoekenLijst());
+
     }
 
 

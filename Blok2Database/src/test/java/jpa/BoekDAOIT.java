@@ -19,7 +19,22 @@ class BoekDAOIT {
         boekDAO = new BoekDAO(em);
         boekDAO.opslaan(new Boek("Harry Potter", "J.K. Rowling"));
         boekDAO.opslaan(new Boek("The Cruel Prince", "H. Black"));
+    }
 
+    @Test
+    void boekOpslaan() {
+        //Given
+
+        //When
+        boekDAO.opslaan(new Boek("From Blood and Ash", "Sarah J. Maas"));
+        int nieuweAantalBoeken = boekDAO.alleBoekenLijst().size();
+        Boek boek = boekDAO.zoek(3);
+        String nieuweTitelBoek = boek.getTitel();
+
+
+        //Then
+        Assertions.assertEquals(3, nieuweAantalBoeken);
+        Assertions.assertEquals("From Blood and Ash", nieuweTitelBoek);
     }
 
     @Test

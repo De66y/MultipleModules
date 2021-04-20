@@ -1,9 +1,10 @@
 package jpa;
 
+import lombok.extern.log4j.Log4j2;
 import javax.persistence.*;
-import java.util.Collection;
 import java.util.List;
 
+@Log4j2
 public class BoekDAO {
 
     private final EntityManager em;
@@ -14,24 +15,55 @@ public class BoekDAO {
 
     public void opslaan(Boek boek) {
         try {
-
             em.getTransaction().begin();
             em.persist(boek);
             em.getTransaction().commit();
+            log.info(String.format("%s is opgeslagen", boek.getTitel()));
         } catch (Exception e) {
-            //LOGGER.debug(e.getClass().getSimpleName() + " : " + e.getMessage());
+            log.warn(e.getClass().getSimpleName() + " : " + e.getMessage());
             em.getTransaction().rollback();
-        } finally {
-            em.clear();
         }
     }
 
-    public Boek zoek(long id) {
+    public Boek zoek(int id) {
         return em.find(Boek.class, id);
     }
 
     public List<Boek> alleBoekenLijst () {
         //JPQL (Java persistence query language) taal daarom geen * bij selecteer all
-        return em.createQuery("SELECT b FROM Boek b", Boek.class).getResultList();    }
+        return em.createNamedQuery("BoekEntity.zoekAllen", Boek.class).getResultList();
+        //return em.createQuery("SELECT b FROM Boek b", Boek.class).getResultList();
+    }
+
+    //Beter een entity krijgen volgens Bram. Dit regelen met een service zeg ik
+    public Boek updateTitel (int id, String name) {
+        try {
+            em.getTransaction().begin();
+            Boek boek = zoek(id);
+            boek.setTitel(name);
+            em.merge(boek);
+            em.getTransaction().commit();
+            log.info(String.format("%s is opgeslagen", boek.getTitel()));
+            return boek;
+        } catch (Exception e) {
+            log.warn(e.getClass().getSimpleName() + " : " + e.getMessage());
+            em.getTransaction().rollback();
+            return null;
+        }
+    }
+
+    //Beter een entity krijgen volgens Bram. Dit regelen met een service zeg ik
+    public void verwijderen(int id) {
+        try {
+            em.getTransaction().begin();
+            Boek boek = zoek(id);
+            em.remove(boek);
+            em.getTransaction().commit();
+            log.info(String.format("%s is verwijderd", boek.getTitel()));
+        } catch (Exception e) {
+            log.warn(e.getClass().getSimpleName() + " : " + e.getMessage());
+            em.getTransaction().rollback();
+        }
+    }
 
 }

@@ -62,8 +62,8 @@ public class GebruikerDAO {
 
     public Gebruiker zoekGebruikersnaamEnWachtwoord(String gebruikersnaam, String wachtwoord) throws NoResultException, NullPointerException {
         TypedQuery query = em.createNamedQuery("GebruikerEntity.zoekVolledigeGebruiker", Gebruiker.class);
-        Gebruiker gebruiker = (Gebruiker) query.setParameter(1, gebruikersnaam)
-                .setParameter(2, wachtwoord).getSingleResult();
+        Gebruiker gebruiker = (Gebruiker) query.setParameter(gebruikersnaam, gebruikersnaam)
+                .setParameter(wachtwoord, wachtwoord).getSingleResult();
         em.clear();
         em.close();
         return gebruiker;
