@@ -6,14 +6,24 @@ import java.util.List;
 
 public class BoekDAO {
 
-    public static final EntityManager em =
-            Persistence.createEntityManagerFactory("TestNaam").createEntityManager();
+    private final EntityManager em;
+
+    public BoekDAO(EntityManager em) {
+        this.em = em;
+    }
 
     public void opslaan(Boek boek) {
-        EntityTransaction transaction = em.getTransaction();
-        transaction.begin();
-        em.persist(boek);
-        transaction.commit();
+        try {
+
+            em.getTransaction().begin();
+            em.persist(boek);
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            //LOGGER.debug(e.getClass().getSimpleName() + " : " + e.getMessage());
+            em.getTransaction().rollback();
+        } finally {
+            em.clear();
+        }
     }
 
     public Boek zoek(long id) {

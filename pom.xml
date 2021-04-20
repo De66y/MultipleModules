@@ -29,6 +29,7 @@
         <pitest.maven.version>1.4.2</pitest.maven.version>
         <pitest.junit5.plugin.version>0.12</pitest.junit5.plugin.version>
         <junit.jupiter.engine.version>5.7.0</junit.jupiter.engine.version>
+        <h2.version>1.4.200</h2.version>
         <log4j.slf4j.impl.version>2.11.2</log4j.slf4j.impl.version>
         <mockito.core.version>3.5.15</mockito.core.version>
         <mockito.junit.jupiter.version>3.5.15</mockito.junit.jupiter.version>
@@ -66,6 +67,13 @@
                 <artifactId>mockito-junit-jupiter</artifactId>
                 <version>${mockito.junit.jupiter.version}</version> <!-- Dezelfde versie als mockito.core zorgde ervoor dat het werkt -->
                 <scope>test</scope>
+            </dependency>
+
+            <!-- In memory database for testing -->
+            <dependency>
+                <groupId>com.h2database</groupId>
+                <artifactId>h2</artifactId>
+                <version>${h2.version}</version>
             </dependency>
 
 

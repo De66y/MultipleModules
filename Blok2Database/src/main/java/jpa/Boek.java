@@ -40,6 +40,6 @@ public class Boek {
 
     @Override
     public String toString() {
-        return String.format("Id: %s  ||  Title: %s  ||  Author: %s", this.id, this.Titel, this.Auteur);
+        return String.format("Id: %s  ||  Title: %s  ||  Author: %s \n", this.id, this.Titel, this.Auteur);
     }
 }
