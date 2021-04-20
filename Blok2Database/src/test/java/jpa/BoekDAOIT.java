@@ -38,6 +38,28 @@ class BoekDAOIT {
     }
 
     @Test
+    void zoekBoekOpIdWelkeNietBestaat() {
+        //Given
+
+        //When
+
+        //Then
+        Assertions.assertEquals(null, boekDAO.zoek(10));
+    }
+
+    @Test
+    void zoekBoekOpId() {
+        //Given
+
+        //When
+        Boek boek = boekDAO.zoek(2);
+
+
+        //Then
+        Assertions.assertEquals("The Cruel Prince", boek.getTitel());
+    }
+
+    @Test
     void aantalBoekenInDeDatabaseTest() {
       //Given
 
@@ -46,5 +68,37 @@ class BoekDAOIT {
       //Then
         Assertions.assertEquals(2, alleBoeken);
     }
+
+    @Test
+    void verwijderEenBoek() {
+        //Given
+
+        //When
+        boekDAO.opslaan(new Boek("From Blood and Ash", "Sarah J. Maas"));
+        int nieuweAantalBoeken = boekDAO.alleBoekenLijst().size();
+
+        boekDAO.verwijderen(3);
+        int aantalBoekenNaVerwijderen = boekDAO.alleBoekenLijst().size();
+
+        //Then
+        Assertions.assertEquals(3, nieuweAantalBoeken);
+        Assertions.assertEquals(2, aantalBoekenNaVerwijderen);
+    }
+
+    @Test
+    void updateEenBoekTitel() {
+        //Given
+
+        //When
+        String titelVoorAanpassing = boekDAO.zoek(1).getTitel();
+
+        boekDAO.updateTitel(1, "Harry Potter and the Goblet of Fire");
+        String titelNaAanpassing = boekDAO.zoek(1).getTitel();
+        //Then
+        Assertions.assertEquals( "Harry Potter", titelVoorAanpassing);
+        Assertions.assertEquals("Harry Potter and the Goblet of Fire", titelNaAanpassing);
+    }
+
+
 
 }

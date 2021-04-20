@@ -26,7 +26,14 @@ public class BoekDAO {
     }
 
     public Boek zoek(int id) {
-        return em.find(Boek.class, id);
+        try {
+            Boek boek = em.find(Boek.class, id);
+            return boek;
+        } catch (NullPointerException e) {
+            log.warn("Boek met id %s bestaat niet", id);
+            return null;
+        }
+
     }
 
     public List<Boek> alleBoekenLijst () {

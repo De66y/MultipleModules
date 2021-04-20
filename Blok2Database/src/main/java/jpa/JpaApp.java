@@ -16,18 +16,18 @@ public class JpaApp {
         //new BoekDAO(em).opslaan(new Boek("A Court of Thorns and Roses", "Sarah J. Maas"));
 
         //Zoek werkt
-        //System.out.println(boekDAO.zoek(1));
+        //System.out.println(boekDAO.zoek(8));
 
         //Alle boeken printen werkt
         //System.out.println(boekDAO.alleBoekenLijst());
 
         //Verwijderen werkt
-        //boekDAO.verwijderen(3);
+        //boekDAO.verwijderen(5);
 
         //Updaten werkt
         //new BoekDAO(em).opslaan(new Boek("Lord Rings", "J.R.R. Tolkien"));
         //System.out.println(boekDAO.alleBoekenLijst());
-        //boekDAO.updateTitel(5, "Lord of the Rings");
+        //boekDAO.updateTitel(1, "Strange the Dreamer");
         //System.out.println(boekDAO.alleBoekenLijst());
 
     }
