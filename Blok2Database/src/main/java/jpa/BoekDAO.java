@@ -73,4 +73,17 @@ public class BoekDAO {
         }
     }
 
+    public void opslaanGerneBijBoek(Boek boek, Gerne gerne) {
+        try {
+            em.getTransaction().begin();
+            boek.setGerneLijst(gerne);
+            em.merge(boek);
+            em.getTransaction().commit();
+            log.info(String.format("Het gerne %s is opgeslagen bij boek %s", gerne.getOmschrijving(), boek.getTitel()));
+        } catch (Exception e) {
+            log.warn(e.getClass().getSimpleName() + " : " + e.getMessage());
+            em.getTransaction().rollback();
+        }
+    }
+
 }

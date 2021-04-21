@@ -8,6 +8,7 @@
     <persistence-unit name="Productie"> <!-- Naam mag je zelf kiezen -->
         <!--<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider> || kan uit omdat hibernate in je pom (classpath) staat -->
 
+        <class>jpa.Boek</class>
         <properties>
             <!--<property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/> || kan uit omdat mysql in je pom (classpath) staat-->
 

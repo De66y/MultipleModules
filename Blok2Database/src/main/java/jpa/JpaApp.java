@@ -8,6 +8,11 @@ public class JpaApp {
     private static final EntityManager em = Persistence.createEntityManagerFactory("Productie").createEntityManager();
 
     public static void main(String[] args) {
+        //GERNEDAO
+        GerneDAO gerneDAO = new GerneDAO(em);
+        //gerneDAO.maakGernesAan();
+
+        //BOEKDAO
         BoekDAO boekDAO = new BoekDAO(em);
 
         //Opslaan werkt
@@ -29,6 +34,10 @@ public class JpaApp {
         //System.out.println(boekDAO.alleBoekenLijst());
         //boekDAO.updateTitel(1, "Strange the Dreamer");
         //System.out.println(boekDAO.alleBoekenLijst());
+
+        //GERNE BIJ BOEK
+        //boekDAO.opslaanGerneBijBoek(boekDAO.zoek(1), gerneDAO.zoek(3));
+        System.out.println(boekDAO.zoek(1));
 
     }
 

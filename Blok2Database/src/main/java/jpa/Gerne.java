@@ -1,15 +1,23 @@
 package jpa;
 
-public enum Gerne {
-    FANTASY(1, "Fantasy"),
-    ROMANCE(2, "Romance"),
-    ACTIE(3, "Actie");
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
+
+@Data @NoArgsConstructor @AllArgsConstructor @Builder
+@Entity
+public class Gerne {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     private String omschrijving;
 
-    Gerne(int id, String omschrijving) {
-        this.id = id;
+    public Gerne(String omschrijving) {
         this.omschrijving = omschrijving;
     }
 
@@ -20,4 +28,8 @@ public enum Gerne {
         return omschrijving;
     }
 
+    @Override
+    public String toString() {
+        return String.format("Id: %s  ||  %s", this.id, this.omschrijving);
+    }
 }
