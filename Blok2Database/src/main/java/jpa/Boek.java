@@ -32,21 +32,6 @@ public class Boek {
         genres = new ArrayList<>();
     }
 
-    public int getId() {
-        return id;
-    }
-    public String getTitel() {
-        return Titel;
-    }
-    public void setTitel(String titel) {
-        this.Titel = titel;
-    }
-    public String getAuteur() {
-        return Auteur;
-    }
-    public void setAuteur(String author) {
-        this.Auteur = author;
-    }
 
     public List<Genre> getGenres() {
         return genres;

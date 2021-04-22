@@ -39,6 +39,8 @@
         <pitest.junit5.plugin.version>0.9</pitest.junit5.plugin.version>
         <mysql.connector.java.version>8.0.16</mysql.connector.java.version>
         <hibernate.core.version>5.4.23.Final</hibernate.core.version>
+        <hibernate-validator.version>6.1.3.Final</hibernate-validator.version>
+        <javax.el>3.0.0</javax.el>
         <lomobck.version>1.18.12</lomobck.version>
     </properties>
 
@@ -106,6 +108,19 @@
                 <version>${hibernate.core.version}</version>
             </dependency>
 
+            <!-- Validator -->
+            <!-- 3 dependencies maar jakarta validation zit al in hibernate validation -->
+            <dependency>
+                <groupId>org.hibernate.validator</groupId>
+                <artifactId>hibernate-validator</artifactId>
+                <version>${hibernate-validator.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.glassfish</groupId>
+                <artifactId>javax.el</artifactId>
+                <version>${javax.el}</version>
+            </dependency>
+
             <!-- Lombock -->
             <dependency>
                 <groupId>org.projectlombok</groupId>
@@ -141,6 +156,7 @@
                 </plugin>
 
                 <!-- Pitest -->
+                <!-- Report staat in map target/pit-reports -->
                 <plugin>
                     <groupId>org.pitest</groupId>
                     <artifactId>pitest-maven</artifactId>
@@ -149,16 +165,16 @@
                         <execution>
                             <goals>
                                 <goal>mutationCoverage</goal> <!-- Tijdens de testphase (zelf aangegeven) wordt van de -->
-                            </goals>                          <!-- pitest plugin deze goal automatisch aangeroepen -->
+                            </goals>                          <!-- pitest plugin(niet standaard plugin) deze goal automatisch aangeroepen -->
                             <phase>test</phase>
                         </execution>
                     </executions>
                     <configuration>
                         <targetClasses>
-                            <param>speedDate*</param> <!-- Zelf de map aangeven -->
+                            <param>nl.marktplaats*</param> <!-- Zelf de map aangeven -->
                         </targetClasses>
                         <targetTests>
-                            <param>speedDate*</param> <!-- Zelf de map aangeven -->
+                            <param>nl.marktplaats*</param> <!-- Zelf de map aangeven -->
                         </targetTests>
                     </configuration>
                     <!-- Deze dependency moet hier staan. Voor de samenwerking met JUnit5 -->
@@ -204,7 +220,4 @@
             </plugin>
         </plugins>
     </build>
-
-
-
 </project>
