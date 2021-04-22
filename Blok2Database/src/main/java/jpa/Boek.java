@@ -24,12 +24,12 @@ public class Boek {
     private String Auteur;
 
     @OneToMany //(fetch = FetchType.EAGER)
-    private List<Gerne> Gernes;
+    private List<Genre> genres;
 
     public Boek(String Titel, String Auteur) {
         this.Titel = Titel;
         this.Auteur = Auteur;
-        Gernes = new ArrayList<>();
+        genres = new ArrayList<>();
     }
 
     public int getId() {
@@ -48,16 +48,16 @@ public class Boek {
         this.Auteur = author;
     }
 
-    public List<Gerne> getGernes() {
-        return Gernes;
+    public List<Genre> getGenres() {
+        return genres;
     }
 
-    public void setGernes(Gerne gerne) {
-        this.Gernes.add(gerne);
+    public void setGenres(Genre genre) {
+        this.genres.add(genre);
     }
 
     @Override
     public String toString() {
-        return String.format("Id: %s  ||  Title: %s  ||  Author: %s  ||  Gerne: %s\n", this.id, this.Titel, this.Auteur, this.Gernes);
+        return String.format("Id: %s  ||  Title: %s  ||  Author: %s  \n", this.id, this.Titel, this.Auteur);
     }
 }

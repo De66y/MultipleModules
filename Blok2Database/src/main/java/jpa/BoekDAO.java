@@ -73,13 +73,13 @@ public class BoekDAO {
         }
     }
 
-    public void opslaanGerneBijBoek(Boek boek, Gerne gerne) {
+    public void opslaanGenreBijBoek(Boek boek, Genre genre) {
         try {
             em.getTransaction().begin();
-            boek.setGernes(gerne);
+            boek.setGenres(genre);
             em.merge(boek);
             em.getTransaction().commit();
-            log.info(String.format("Het gerne %s is opgeslagen bij boek %s", gerne.getOmschrijving(), boek.getTitel()));
+            log.info(String.format("Het genre %s is opgeslagen bij boek %s", genre.getOmschrijving(), boek.getTitel()));
         } catch (Exception e) {
             log.warn(e.getClass().getSimpleName() + " : " + e.getMessage());
             em.getTransaction().rollback();

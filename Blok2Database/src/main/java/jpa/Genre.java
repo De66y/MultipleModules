@@ -9,7 +9,7 @@ import javax.persistence.*;
 
 @Data @NoArgsConstructor @AllArgsConstructor @Builder
 @Entity
-public class Gerne {
+public class Genre {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,7 +17,7 @@ public class Gerne {
 
     private String omschrijving;
 
-    public Gerne(String omschrijving) {
+    public Genre(String omschrijving) {
         this.omschrijving = omschrijving;
     }
 
