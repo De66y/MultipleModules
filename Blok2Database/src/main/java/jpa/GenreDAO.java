@@ -36,7 +36,7 @@ public class GenreDAO {
             Genre genre = em.find(Genre.class, id);
             return genre;
         } catch (NullPointerException e) {
-            log.warn("Boek met id %s bestaat niet", id);
+            log.warn("Book met id %s bestaat niet", id);
             return null;
         }
 

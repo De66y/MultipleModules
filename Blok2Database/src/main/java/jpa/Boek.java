@@ -51,7 +51,6 @@ public class Boek {
     public List<Genre> getGenres() {
         return genres;
     }
-
     public void setGenres(Genre genre) {
         this.genres.add(genre);
     }

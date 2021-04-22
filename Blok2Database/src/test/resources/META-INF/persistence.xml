@@ -8,6 +8,8 @@
     <persistence-unit name="Test"> <!-- Naam mag je zelf kiezen -->
         <!--<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider> || kan uit omdat hibernate in je pom (classpath) staat -->
     <!-- Alle entity classes hier noemen -->
+        <class>jpa.Boek</class>
+        <class>jpa.Genre</class>
 
         <properties>
             <!--<property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/> || kan uit omdat mysql in je pom (classpath) staat-->

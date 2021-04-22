@@ -31,13 +31,13 @@ public class JpaApp {
         //boekDAO.verwijderen(5);
 
         //Updaten werkt
-        //new BoekDAO(em).opslaan(new Boek("Lord Rings", "J.R.R. Tolkien"));
+        //new BoekDAO(em).opslaan(new Book("Lord Rings", "J.R.R. Tolkien"));
         //System.out.println(boekDAO.alleBoekenLijst());
         //boekDAO.updateTitel(1, "Strange the Dreamer");
         //System.out.println(boekDAO.alleBoekenLijst());
 
         //GENRE BIJ BOEK
-        //boekDAO.opslaanGenreBijBoek(boekDAO.zoek(1), genreDAO.zoek(3));
+        boekDAO.opslaanGenreBijBoek(boekDAO.zoek(1), genreDAO.zoek(3));
         //System.out.println(boekDAO.zoek(1));
 
        Boek boek2 = boekDAO.zoek(1);

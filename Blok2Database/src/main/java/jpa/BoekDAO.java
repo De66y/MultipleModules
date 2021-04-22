@@ -30,7 +30,7 @@ public class BoekDAO {
             Boek boek = em.find(Boek.class, id);
             return boek;
         } catch (NullPointerException e) {
-            log.warn("Boek met id %s bestaat niet", id);
+            log.warn("Book met id %s bestaat niet", id);
             return null;
         }
 
@@ -39,7 +39,7 @@ public class BoekDAO {
     public List<Boek> alleBoekenLijst () {
         //JPQL (Java persistence query language) taal daarom geen * bij selecteer all
         return em.createNamedQuery("BoekEntity.zoekAllen", Boek.class).getResultList();
-        //return em.createQuery("SELECT b FROM Boek b", Boek.class).getResultList();
+        //return em.createQuery("SELECT b FROM Book b", Book.class).getResultList();
     }
 
     //Beter een entity krijgen volgens Bram. Dit regelen met een service zeg ik

@@ -8,7 +8,6 @@
     <persistence-unit name="Productie"> <!-- Naam mag je zelf kiezen -->
         <!--<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider> || kan uit omdat hibernate in je pom (classpath) staat -->
 
-        <class>jpa.Boek</class>
         <properties>
             <!--<property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/> || kan uit omdat mysql in je pom (classpath) staat-->
 
@@ -18,6 +17,24 @@
 
 
             <property name="hibernate.hbm2ddl.auto" value="update"/> <!-- Create alles wegooien en opnieuw opbouwen van table. Normaal update -->
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.format_sql" value="true"/>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect"/>
+        </properties>
+    </persistence-unit>
+
+    <persistence-unit name="ProductieJpa2"> <!-- Naam mag je zelf kiezen -->
+        <!--<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider> || kan uit omdat hibernate in je pom (classpath) staat -->
+
+        <properties>
+            <!--<property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/> || kan uit omdat mysql in je pom (classpath) staat-->
+
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost/jpa2?serverTimezone=UTC"/>
+            <property name="javax.persistence.jdbc.user" value="root"/>
+            <property name="javax.persistence.jdbc.password" value="d3v3l0p3r"/>
+
+
+            <property name="hibernate.hbm2ddl.auto" value="create"/> <!-- Create alles wegooien en opnieuw opbouwen van table. Normaal update -->
             <property name="hibernate.show_sql" value="true"/>
             <property name="hibernate.format_sql" value="true"/>
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect"/>
