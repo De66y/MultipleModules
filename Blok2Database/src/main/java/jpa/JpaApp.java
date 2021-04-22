@@ -2,6 +2,7 @@ package jpa;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
+import java.util.List;
 
 public class JpaApp {
 
@@ -10,15 +11,15 @@ public class JpaApp {
     public static void main(String[] args) {
         //GERNEDAO
         GerneDAO gerneDAO = new GerneDAO(em);
-        //gerneDAO.maakGernesAan();
+        gerneDAO.maakGernesAan();
 
         //BOEKDAO
         BoekDAO boekDAO = new BoekDAO(em);
 
         //Opslaan werkt
-        //new BoekDAO(em).opslaan(new Boek("Strange the Dreamer", "L. Taylor"));
-        //new BoekDAO(em).opslaan(new Boek("Outlander", "D. Gabaldon"));
-        //new BoekDAO(em).opslaan(new Boek("A Court of Thorns and Roses", "Sarah J. Maas"));
+        new BoekDAO(em).opslaan(new Boek("Strange the Dreamer", "L. Taylor"));
+        new BoekDAO(em).opslaan(new Boek("Outlander", "D. Gabaldon"));
+        new BoekDAO(em).opslaan(new Boek("A Court of Thorns and Roses", "Sarah J. Maas"));
 
         //Zoek werkt
         //System.out.println(boekDAO.zoek(8));
@@ -37,7 +38,11 @@ public class JpaApp {
 
         //GERNE BIJ BOEK
         //boekDAO.opslaanGerneBijBoek(boekDAO.zoek(1), gerneDAO.zoek(3));
-        System.out.println(boekDAO.zoek(1));
+        //System.out.println(boekDAO.zoek(1));
+
+       Boek boek2 = boekDAO.zoek(1);
+       List<Gerne> testlijst = boek2.getGernes();
+        System.out.println(testlijst);
 
     }
 

@@ -76,7 +76,7 @@ public class BoekDAO {
     public void opslaanGerneBijBoek(Boek boek, Gerne gerne) {
         try {
             em.getTransaction().begin();
-            boek.setGerneLijst(gerne);
+            boek.setGernes(gerne);
             em.merge(boek);
             em.getTransaction().commit();
             log.info(String.format("Het gerne %s is opgeslagen bij boek %s", gerne.getOmschrijving(), boek.getTitel()));
