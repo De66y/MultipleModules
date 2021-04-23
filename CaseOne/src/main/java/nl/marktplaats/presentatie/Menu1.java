@@ -7,7 +7,7 @@ import java.util.Scanner;
 @Log4j2
 public class Menu1 implements IMenu{
     @Override
-    public void showMenu(Scanner scanner) {
+    public void showMenu() {
 
     }
 }

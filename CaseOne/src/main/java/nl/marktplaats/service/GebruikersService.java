@@ -1,10 +1,13 @@
 package nl.marktplaats.service;
 
 import lombok.extern.log4j.Log4j2;
+import nl.marktplaats.data.BezorgwijzeEnum;
 import nl.marktplaats.data.GebruikerDAO;
 import nl.marktplaats.gedeeld.domeinmodel.Gebruiker;
+import nl.marktplaats.service.helper.Wachtwoordgenerator;
 
 import javax.persistence.NoResultException;
+import java.util.List;
 
 @Log4j2
 public class GebruikersService {
@@ -25,18 +28,16 @@ public class GebruikersService {
         return "S";
     }
 
-    public Gebruiker registreren () {
-        //Opgeven emailadres presentatie
+    public Gebruiker registreren (String emailadres, String adres) {
+        Gebruiker gebruiker =
+        Gebruiker.builder()
+                .emailadres(emailadres)
+                .wachtwoord(new Wachtwoordgenerator().maakEenRandomWachtwoord())
+                .adres(adres)
+                .akkoordReglement("J").build();
 
-        //Check of dit emailadres al bestaat via presentatie
-
-        //Kiezen bezorgwijzen via hier
-
-        //if thuis afhalen = bezorgwijze dan adres registreren presentatie
-
-        //gegenereerd wachtwoord door het systeem via hier
-
-        return null;
+        gebruikerDAO.opslaan(gebruiker);
+        return gebruiker;
 
     }
 
@@ -48,7 +49,7 @@ public class GebruikersService {
             return true;
         } catch (NoResultException e) {
             log.debug(e.getClass().getSimpleName() + " : " + e.getMessage());
-            log.info("Het emailadres is onjuist");
+            log.info("Het emailadres bestaat niet");
             return false;
         }
     }
@@ -64,6 +65,4 @@ public class GebruikersService {
             return false;
         }
     }
-
-
 }

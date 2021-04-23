@@ -1,13 +1,14 @@
 package nl.marktplaats.gedeeld.domeinmodel;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 
 @Entity
-@Data @NoArgsConstructor @AllArgsConstructor
+@Data @NoArgsConstructor @AllArgsConstructor @Builder
 @NamedQueries({
         @NamedQuery(name= "GebruikerEntity.alleGebruikers", query= "SELECT e FROM Gebruiker e"),
         @NamedQuery(name= "GebruikerEntity.zoekEmailadres", query= "SELECT e FROM Gebruiker e WHERE e.emailadres=:emailadres"),
@@ -19,6 +20,8 @@ public class Gebruiker {
 
     private String emailadres;
     private String wachtwoord;
+    private String adres;
+    private String akkoordReglement;
 
     public Gebruiker(String emailadres, String wachtwoord) {
         this.emailadres = emailadres;

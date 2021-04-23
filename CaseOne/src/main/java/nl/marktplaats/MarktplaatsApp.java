@@ -2,12 +2,14 @@ package nl.marktplaats;
 
 import nl.marktplaats.data.GebruikerDAO;
 import nl.marktplaats.gedeeld.Fabriek;
+import nl.marktplaats.presentatie.submenu.RegistreerMenu;
 import nl.marktplaats.service.GebruikersService;
 import nl.marktplaats.service.helper.DocumentLezer;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 import java.io.File;
+import java.util.Scanner;
 
 public class MarktplaatsApp {
 
@@ -42,7 +44,10 @@ public class MarktplaatsApp {
         //RegistreerMenu registreerMenu = new RegistreerMenu(gebruikersservice);
         //registreerMenu.showMenu(new Scanner(System.in));
 
-        DocumentLezer documentLezer = new DocumentLezer();
-        documentLezer.lees();
+        //new RegistreerMenu(gebruikersservice, new Scanner(System.in)).showMenu();
+
+        //new RegistreerMenu(gebruikersservice, new Scanner(System.in)).showMenu();
+
+        System.out.println(gebruikersservice.registreren("Testemail", "Testadres"));
     }
 }

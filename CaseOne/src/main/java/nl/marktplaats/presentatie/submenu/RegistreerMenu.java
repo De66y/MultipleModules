@@ -12,52 +12,32 @@ import java.util.List;
 import java.util.Scanner;
 
 @Log4j2
-public class RegistreerMenu implements IMenu {
+public class RegistreerMenu  implements IMenu{
     private GebruikersService gebruikersService;
     private final Scanner scanner;
+
     public RegistreerMenu(GebruikersService gebruikersService, Scanner scanner) {
         this.gebruikersService = gebruikersService;
         this.scanner = scanner;
     }
 
-
     @Override
-    public void showMenu(Scanner scanner) {
-        scanner = new Scanner(System.in);
+    public void showMenu() {
         System.out.print("Wat is uw emailadres: ");
         String emailadres = scanner.nextLine();
+        if (gebruikersService.emailadresBestaat(emailadres)) showMenu();
 
-        if (gebruikersService.emailadresBestaat(emailadres)) showMenu(scanner);
-
-        List <BezorgwijzeEnum> bezorgwijzeList = bezorgwijzenKiezen();
-        for (BezorgwijzeEnum b : bezorgwijzeList) System.out.println(b);
-
-        String adres = adresOpvragen();
-
-        if (adres == null && thuisAfhalenIsGekozen(bezorgwijzeList)) adresOpvragen();
+        List<BezorgwijzeEnum> bezorgwijzen = bezorgwijzenKiezen();
+        String adres = adresOpvragen(bezorgwijzen);
 
         String akkoordReglement = akkoordMetReglement();
 
-        String wachtwoord = new Wachtwoordgenerator().maakEenRandomWachtwoord();
-
-        //Opgeven emailadres XXXXXXXXXX
-
-        //Check of dit emailadres al bestaat XXXXXXXXXX
-
-        //Kiezen bezorgwijzen XXXXXXXXXX
-
-        //if thuis afhalen = bezorgwijze dan adres registreren XXXXXXXXXX
-
-        //Akkoord met regelement XXXXXXXXXX
-
-        //gegenereerd wachtwoord door het systeem XXXXXXXXXX
-
-
+        gebruikersService.registreren(emailadres, adres);
     }
 
 
 
-    public List bezorgwijzenKiezen() {
+    private List bezorgwijzenKiezen() {
         List<BezorgwijzeEnum> bezorgwijzeList = new ArrayList<>();
         System.out.println("Geef nu aan welke bezorgwijzen u wilt toevoegen aan uw account: ");
 
@@ -77,10 +57,11 @@ public class RegistreerMenu implements IMenu {
         return bezorgwijzeList;
     }
 
-    private String adresOpvragen() {
+    private String adresOpvragen(List<BezorgwijzeEnum> bezorgwijzen) {
         System.out.println("Wat is uw adres");
-        return scanner.nextLine();
-
+        String adres = scanner.nextLine();
+        if (thuisAfhalenIsGekozen(bezorgwijzen) && adres.isEmpty()) adresOpvragen(bezorgwijzen);
+        return adres;
     }
 
     private boolean thuisAfhalenIsGekozen(List<BezorgwijzeEnum> bezorgwijzen) {

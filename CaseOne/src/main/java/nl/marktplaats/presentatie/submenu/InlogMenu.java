@@ -12,13 +12,15 @@ import java.util.Scanner;
 public class InlogMenu implements IMenu, ISubMenu {
 
     private GebruikersService gebruikersService;
+    private Scanner scanner;
 
-    public InlogMenu(GebruikersService gebruikersService) {
+    public InlogMenu(GebruikersService gebruikersService, Scanner scanner) {
         this.gebruikersService = gebruikersService;
+        this.scanner = scanner;
     }
 
     @Override
-    public void showMenu(Scanner scanner) {
+    public void showMenu() {
         int keuze;
         try {
             System.out.printf("U bent in het %s.\nWaarmee kan ik u van dienst zijn: \n" +
@@ -30,23 +32,23 @@ public class InlogMenu implements IMenu, ISubMenu {
 
             switch (keuze) {
                 case 1:
-                    showSubMenu(scanner);
+                    showSubMenu();
                     break;
                 case 2:
                     System.out.println("Tot de volgende keer :)");
                     break;
                 default:
                     log.info("U heeft een keuze gemaakt die niet bestaat, kies opnieuw: ");
-                    showMenu(new Scanner(System.in));
+                    showMenu();
             }
         } catch (InputMismatchException e){
             log.debug(e.getClass().getSimpleName() + " : " + e.getMessage());
-            showMenu(new Scanner(System.in));
+            showMenu();
         }
     }
 
     @Override
-    public void showSubMenu(Scanner scanner) {
+    public void showSubMenu() {
         scanner = new Scanner(System.in);
         System.out.print("Wat is uw emailadres: ");
         String emailadres = scanner.nextLine();
@@ -59,10 +61,10 @@ public class InlogMenu implements IMenu, ISubMenu {
     private void switchSubMenu(String emailadres, String wachtwoord) {
         switch (gebruikersService.inloggen(emailadres, wachtwoord)) {
             case "EN":
-                showMenu(new Scanner(System.in));
+                showMenu();
                 break;
             case "WN":
-                showMenu(new Scanner(System.in));
+                showMenu();
                 break;
             case "S":
                 //@TODO ingelogd hoofdmenu weergeven
