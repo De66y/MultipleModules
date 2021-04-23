@@ -2,7 +2,6 @@ package nl.marktplaats.service;
 
 import lombok.extern.log4j.Log4j2;
 import nl.marktplaats.data.GebruikerDAO;
-import nl.marktplaats.model.Gebruiker;
 
 import javax.persistence.NoResultException;
 

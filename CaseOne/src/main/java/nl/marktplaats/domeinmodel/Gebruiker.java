@@ -1,4 +1,4 @@
-package nl.marktplaats.model;
+package nl.marktplaats.domeinmodel;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

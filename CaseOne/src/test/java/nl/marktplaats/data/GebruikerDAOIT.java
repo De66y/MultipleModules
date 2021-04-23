@@ -1,6 +1,6 @@
 package nl.marktplaats.data;
 
-import nl.marktplaats.model.Gebruiker;
+import nl.marktplaats.domeinmodel.Gebruiker;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;

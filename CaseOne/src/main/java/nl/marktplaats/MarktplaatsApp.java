@@ -1,7 +1,6 @@
 package nl.marktplaats;
 
 import nl.marktplaats.data.GebruikerDAO;
-import nl.marktplaats.model.Gebruiker;
 import nl.marktplaats.service.Gebruikersservice;
 
 import javax.persistence.EntityManager;
