@@ -19,6 +19,10 @@ public class Fabriek {
         this.bezorgwijzeDao = new BezorgwijzeDao(em);
     }
 
+    public EntityManager getEm() {
+        return em;
+    }
+
     public void enumsInDatabase() {
         for (BezorgwijzeEnum bezorgwijze : BezorgwijzeEnum.values()) {
             bezorgwijzeDao.opslaan(
@@ -36,7 +40,6 @@ public class Fabriek {
 
     @Log4j2
     private static class BezorgwijzeDao{
-        //@TODO nog mee laten geven
         private final EntityManager em;
 
         public BezorgwijzeDao(EntityManager em) {

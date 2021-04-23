@@ -26,15 +26,15 @@ public class GebruikersService {
     }
 
     public Gebruiker registreren () {
-        //Opgeven emailadres
+        //Opgeven emailadres presentatie
 
-        //Check of dit emailadres al bestaat
+        //Check of dit emailadres al bestaat via presentatie
 
-        //Kiezen bezorgwijzen
+        //Kiezen bezorgwijzen via hier
 
-        //if thuis afhalen = bezorgwijze dan adres registreren
+        //if thuis afhalen = bezorgwijze dan adres registreren presentatie
 
-        //gegenereerd wachtwoord door het systeem
+        //gegenereerd wachtwoord door het systeem via hier
 
         return null;
 
@@ -42,7 +42,7 @@ public class GebruikersService {
 
 
 
-    private boolean emailadresBestaat(String emailadres) {
+    public boolean emailadresBestaat(String emailadres) {
         try {
             gebruikerDAO.zoekEmailadres(emailadres);
             return true;
