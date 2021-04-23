@@ -2,6 +2,7 @@ package nl.marktplaats.service;
 
 import lombok.extern.log4j.Log4j2;
 import nl.marktplaats.data.GebruikerDAO;
+import nl.marktplaats.gedeeld.domeinmodel.Gebruiker;
 
 import javax.persistence.NoResultException;
 
@@ -23,6 +24,12 @@ public class GebruikersService {
         log.info(String.format("Inloggen succesvol met emailadres: %s", emailadres));
         return "S";
     }
+
+    //public Gebruiker registreren () {
+
+    //}
+
+
 
     private boolean emailadresBestaat(String emailadres) {
         try {
