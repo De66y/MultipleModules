@@ -1,13 +1,10 @@
 package nl.marktplaats.data;
 
 import lombok.extern.log4j.Log4j2;
-import nl.marktplaats.domeinmodel.Gebruiker;
+import nl.marktplaats.gedeeld.domeinmodel.Gebruiker;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import java.util.List;
-
-
-//
 
 @Log4j2
 public class GebruikerDAO {
@@ -40,7 +37,12 @@ public class GebruikerDAO {
         }
     }
 
-    public Gebruiker zoekGebruikersnaamEnWachtwoord(String gebruikersnaam, String wachtwoord) {
+    public Gebruiker zoekEmailadres(String emailadres) {
+        TypedQuery query = em.createNamedQuery("GebruikerEntity.zoekEmailadres", Gebruiker.class);
+        return (Gebruiker) query.setParameter("emailadres", emailadres).getSingleResult();
+    }
+
+    public Gebruiker zoekEmailadresEnWachtwoord(String gebruikersnaam, String wachtwoord) {
         TypedQuery query = em.createNamedQuery("GebruikerEntity.zoekVolledigeGebruiker", Gebruiker.class);
         Gebruiker gebruiker = (Gebruiker) query.setParameter("gebruikersnaam", gebruikersnaam)
                 .setParameter("wachtwoord", wachtwoord).getSingleResult();

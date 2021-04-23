@@ -1,6 +1,6 @@
 package nl.marktplaats.data;
 
-import nl.marktplaats.domeinmodel.Gebruiker;
+import nl.marktplaats.gedeeld.domeinmodel.Gebruiker;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -61,7 +61,7 @@ class GebruikerDAOIT {
     }
 
     @Test
-    void zoekGebruikersnaamOpIdWelkeNietBestaatTest() {
+    void zoekOpIdWelkeNietBestaatTest() {
         //Given
 
         //When
@@ -75,7 +75,7 @@ class GebruikerDAOIT {
         //Given
 
         //When
-        Gebruiker gebruiker = gebruikersDAO.zoekGebruikersnaamEnWachtwoord("Br@m", "InfoSupport");
+        Gebruiker gebruiker = gebruikersDAO.zoekEmailadresEnWachtwoord("Br@m", "InfoSupport");
 
         //Then
         assertEquals("Br@m", gebruiker.getEmailadres());
@@ -89,7 +89,7 @@ class GebruikerDAOIT {
         //When
 
         //Then
-        assertThrows(NoResultException.class, () -> {gebruikersDAO.zoekGebruikersnaamEnWachtwoord("Debby@Home", "NightCourt");});
+        assertThrows(NoResultException.class, () -> {gebruikersDAO.zoekEmailadresEnWachtwoord("Debby@Home", "NightCourt");});
     }
 
     @Test
