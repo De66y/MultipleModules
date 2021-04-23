@@ -20,7 +20,7 @@ public class MenuInloggen implements IMenu, ISubMenu{
         int keuze;
         try {
             System.out.printf("U bent in het %s.\n Waarmee kan ik u van dienst zijn: \n" +
-                            "1. ----- Inloggen UNDER CONSTRUCTION----- \n" +
+                            "1. Inloggen \n" +
                             "2. Afsluiten\n"
                     ,this.getClass().getSimpleName());
             System.out.print("Uw keuze: ");
