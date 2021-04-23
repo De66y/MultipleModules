@@ -65,7 +65,7 @@ class GebruikerDAOIT {
         //When
 
         //Then
-        assertEquals(null, gebruikersDAO.zoek(42));
+        assertNull(gebruikersDAO.zoek(42));
     }
 
     @Test
