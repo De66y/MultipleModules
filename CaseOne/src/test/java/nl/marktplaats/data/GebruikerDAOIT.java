@@ -1,11 +1,9 @@
 package nl.marktplaats.data;
 
 import nl.marktplaats.gedeeld.domeinmodel.Gebruiker;
-
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
@@ -49,7 +47,7 @@ class GebruikerDAOIT {
     }
 
     @Test
-    void zoekgebruikerOpIdTest() {
+    void zoekGebruikerOpIdTest() {
         //Given
 
         //When
@@ -68,6 +66,28 @@ class GebruikerDAOIT {
 
         //Then
         assertEquals(null, gebruikersDAO.zoek(42));
+    }
+
+    @Test
+    void zoekGebruikerOpEmailadresTest() {
+        //Given
+
+        //When
+
+        Gebruiker gebruiker = gebruikersDAO.zoekEmailadres("Vincent@Smits.nl");
+        //Then
+
+        assertEquals("Vincent@Smits.nl", gebruiker.getEmailadres());
+    }
+
+    @Test
+    void zoekGebruikerOpEmailadresGefaaldTest() {
+        //Given
+
+        //When
+
+        //Then
+        assertThrows(NoResultException.class, () -> {gebruikersDAO.zoekEmailadres(("Debby@Home"));});
     }
 
     @Test
@@ -90,6 +110,16 @@ class GebruikerDAOIT {
 
         //Then
         assertThrows(NoResultException.class, () -> {gebruikersDAO.zoekEmailadresEnWachtwoord("Debby@Home", "NightCourt");});
+    }
+
+    @Test
+    void zoekOpEmailadresEnWachtwoordGefaaldTest2() {
+        //Given
+
+        //When
+
+        //Then
+        assertThrows(NoResultException.class, () -> {gebruikersDAO.zoekEmailadresEnWachtwoord("Br@m", "OCP");});
     }
 
     @Test

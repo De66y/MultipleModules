@@ -24,9 +24,6 @@ public class GebruikersService {
         return "S";
     }
 
-
-
-
     private boolean emailadresBestaat(String emailadres) {
         try {
             gebruikerDAO.zoekEmailadres(emailadres);
