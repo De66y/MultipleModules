@@ -1,6 +1,6 @@
 package nl.marktplaats.data;
 
-public enum BezorgwijzeEnum implements Bezorglike{
+public enum BezorgwijzeEnum {
     AFHALEN_MAGAZIJN(1, "Afhalen magazijn"),
     THUIS_AFHALEN_BIJ_VERKOPER(2, "Thuis afhalen bij verkoper"),
     VERSTUREN(3, "Versturen"),

@@ -1,7 +1,10 @@
 package nl.marktplaats;
 
+import nl.marktplaats.data.BezorgwijzeDAO;
 import nl.marktplaats.data.GebruikerDAO;
 import nl.marktplaats.gedeeld.Fabriek;
+import nl.marktplaats.gedeeld.domeinmodel.Bezorgwijze;
+import nl.marktplaats.gedeeld.domeinmodel.Gebruiker;
 import nl.marktplaats.presentatie.submenu.RegistreerMenu;
 import nl.marktplaats.service.GebruikersService;
 import nl.marktplaats.service.helper.DocumentLezer;
@@ -17,9 +20,9 @@ public class MarktplaatsApp {
 
     public static void main(String[] args) {
         //Start van de applicatie
-        Fabriek fabriek = new Fabriek();
+        Fabriek fabriek = new Fabriek(new BezorgwijzeDAO(em)); //@TODO em oplossen
         //Deze maar 1 keer
-        //fabriek.enumsInDatabase();
+        fabriek.bezorgwijzeInDatabase();
 
 
         //Moet voor nu nog worden aangemaakt
@@ -27,9 +30,9 @@ public class MarktplaatsApp {
         GebruikersService gebruikersservice = new GebruikersService(gebruikerDAO);
 
         //Standaard voor opslaan
-        //gebruikerDAO.opslaan(new Gebruiker("Calimero", "Wachtwoord"));
-        //gebruikerDAO.opslaan(new Gebruiker("Dotje", "Neus"));
-        //gebruikerDAO.opslaan(new Gebruiker("Beer", "SnufSnuf"));
+        gebruikerDAO.opslaan(new Gebruiker("Calimero", "Wachtwoord"));
+        gebruikerDAO.opslaan(new Gebruiker("Dotje", "Neus"));
+        gebruikerDAO.opslaan(new Gebruiker("Beer", "SnufSnuf"));
 
 
         //TEST
@@ -49,6 +52,7 @@ public class MarktplaatsApp {
         //new RegistreerMenu(gebruikersservice, new Scanner(System.in)).showMenu();
 
         //System.out.println(gebruikersservice.registreren("Testemail", "Testadres"));
+
 
     }
 }
