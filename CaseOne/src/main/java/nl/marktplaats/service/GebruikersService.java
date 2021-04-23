@@ -25,9 +25,20 @@ public class GebruikersService {
         return "S";
     }
 
-    //public Gebruiker registreren () {
+    public Gebruiker registreren () {
+        //Opgeven emailadres
 
-    //}
+        //Check of dit emailadres al bestaat
+
+        //Kiezen bezorgwijzen
+
+        //if thuis afhalen = bezorgwijze dan adres registreren
+
+        //gegenereerd wachtwoord door het systeem
+
+        return null;
+
+    }
 
 
 
