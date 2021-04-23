@@ -48,6 +48,7 @@ public class MarktplaatsApp {
 
         //new RegistreerMenu(gebruikersservice, new Scanner(System.in)).showMenu();
 
-        System.out.println(gebruikersservice.registreren("Testemail", "Testadres"));
+        //System.out.println(gebruikersservice.registreren("Testemail", "Testadres"));
+
     }
 }
