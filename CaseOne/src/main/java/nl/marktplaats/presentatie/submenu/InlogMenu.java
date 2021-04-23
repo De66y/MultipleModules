@@ -1,17 +1,19 @@
-package nl.marktplaats.presentatie;
+package nl.marktplaats.presentatie.submenu;
 
 import lombok.extern.log4j.Log4j2;
+import nl.marktplaats.presentatie.IMenu;
+import nl.marktplaats.presentatie.ISubMenu;
 import nl.marktplaats.service.GebruikersService;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 @Log4j2
-public class MenuInloggen implements IMenu, ISubMenu{
+public class InlogMenu implements IMenu, ISubMenu {
 
     private GebruikersService gebruikersService;
 
-    public MenuInloggen(GebruikersService gebruikersService) {
+    public InlogMenu(GebruikersService gebruikersService) {
         this.gebruikersService = gebruikersService;
     }
 

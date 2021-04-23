@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 @Entity
-@Data @NoArgsConstructor @AllArgsConstructor @Builder
+@Data @NoArgsConstructor @AllArgsConstructor
 @NamedQueries({
         @NamedQuery(name= "GebruikerEntity.alleGebruikers", query= "SELECT e FROM Gebruiker e"),
         @NamedQuery(name= "GebruikerEntity.zoekEmailadres", query= "SELECT e FROM Gebruiker e WHERE e.emailadres=:emailadres"),

@@ -1,6 +1,6 @@
-package nl.marktplaats.service;
+package nl.marktplaats.data;
 
-public enum Bezorgwijze {
+public enum BezorgwijzeEnum {
     AFHALEN_MAGAZIJN(1, "Afhalen magazijn"),
     THUIS_AFHALEN_BIJ_VERKOPER(2, "Thuis afhalen bij verkoper"),
     VERSTUREN(3, "Versturen"),
@@ -9,7 +9,7 @@ public enum Bezorgwijze {
     private int id;
     private String omschrijving;
 
-    Bezorgwijze(int id, String omschrijving) {
+    BezorgwijzeEnum(int id, String omschrijving) {
         this.id = id;
         this.omschrijving = omschrijving;
     }
