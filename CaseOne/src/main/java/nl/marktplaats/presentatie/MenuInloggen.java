@@ -19,7 +19,7 @@ public class MenuInloggen implements IMenu, ISubMenu{
     public void showMenu(Scanner scanner) {
         int keuze;
         try {
-            System.out.printf("U bent in het %s.\n Waarmee kan ik u van dienst zijn: \n" +
+            System.out.printf("U bent in het %s.\nWaarmee kan ik u van dienst zijn: \n" +
                             "1. Inloggen \n" +
                             "2. Afsluiten\n"
                     ,this.getClass().getSimpleName());
@@ -57,11 +57,9 @@ public class MenuInloggen implements IMenu, ISubMenu{
     private void switchSubMenu(String emailadres, String wachtwoord) {
         switch (gebruikersService.inloggen(emailadres, wachtwoord)) {
             case "EN":
-                System.out.println("Je zit in EN");
                 showMenu(new Scanner(System.in));
                 break;
             case "WN":
-                System.out.println("Je zit in WN");
                 showMenu(new Scanner(System.in));
                 break;
             case "S":
