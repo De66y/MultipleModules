@@ -27,6 +27,8 @@ public class Product implements IProduct {
     private String beschrijving;
     @OneToMany
     private List<Bezorgwijze> bezorgopties;
+    @OneToOne
+    private Gebruiker gebruiker;
 
     public Product(ProductCategorie productCategorie, String naam, double prijs, String beschrijving) {
         this.productCategorie = productCategorie;
@@ -77,7 +79,14 @@ public class Product implements IProduct {
         return bezorgopties;
     }
 
-    @Override public void setBezorgopties(Bezorgwijze bezorgwijze) {
-        bezorgopties.add(bezorgwijze);
+    @Override public void setBezorgopties(List<Bezorgwijze> bezorgopties) {
+        this.bezorgopties = bezorgopties;
+    }
+
+    public Gebruiker getGebruiker() {
+        return gebruiker;
+    }
+    public void setGebruiker(Gebruiker gebruiker) {
+        this.gebruiker = gebruiker;
     }
 }

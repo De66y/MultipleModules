@@ -11,6 +11,7 @@ import nl.marktplaats.gedeeld.domeinmodel.Product;
 import nl.marktplaats.presentatie.submenu.RegistreerMenu;
 import nl.marktplaats.service.BezorgwijzeService;
 import nl.marktplaats.service.GebruikersService;
+import nl.marktplaats.service.ProductService;
 import nl.marktplaats.service.helper.DocumentLezer;
 
 import javax.persistence.EntityManager;
@@ -33,14 +34,14 @@ public class MarktplaatsApp {
         fabriek.bezorgwijzeInDatabase();
 
         //Moet voor nu nog worden aangemaakt
-        /*GebruikerDAO gebruikerDAO = new GebruikerDAO(fabriek.getEm());
+        GebruikerDAO gebruikerDAO = new GebruikerDAO(fabriek.getEm());
         GebruikersService gebruikersservice = new GebruikersService(gebruikerDAO);
-        BezorgwijzeService bezorgwijzeService = fabriek.getBezorgwijzeService();*/
+        //BezorgwijzeService bezorgwijzeService = fabriek.getBezorgwijzeService();
 
         //Standaard voor opslaan
-        /*gebruikerDAO.opslaan(new Gebruiker("Calimero", "Wachtwoord"));
+        gebruikerDAO.opslaan(new Gebruiker("Calimero", "Wachtwoord"));
         gebruikerDAO.opslaan(new Gebruiker("Dotje", "Neus"));
-        gebruikerDAO.opslaan(new Gebruiker("Beer", "SnufSnuf"));*/
+        gebruikerDAO.opslaan(new Gebruiker("Beer", "SnufSnuf"));
 
 
         //TEST
@@ -56,9 +57,16 @@ public class MarktplaatsApp {
         bezorgwijzen.add(new Bezorgwijze("Versturen"));
         bezorgwijzen.add(new Bezorgwijze("Afhalen magazijn"));
 
-        Product product = new Product();
+        Product product = new Product(ProductCategorie.DUIKBENODIGDHEDEN, "Duikfles", 139.99, "Duikfles voor perslucht");
+        Product product2 = new Product(ProductCategorie.DIERBENODIGDHEDEN, "Konijnenren", 20.00, "Ren 4m bij 2m ");
+        //product.setBezorgopties(bezorgwijzen);
 
-        new ProductDAO(fabriek.getEm()).opslaan(new Product(ProductCategorie.DUIKBENODIGDHEDEN, "Duikfles", 139.99, "Duikfles voor perslucht"));
+        //new ProductDAO(fabriek.getEm()).opslaan(product);
+
+        new ProductService(new ProductDAO(fabriek.getEm()), gebruikersservice).productTeKoopAanbieden("Dotje", product);
+        new ProductService(new ProductDAO(fabriek.getEm()), gebruikersservice).productTeKoopAanbieden("Dotje", product2);
+
+
 
 
     }

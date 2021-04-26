@@ -18,23 +18,23 @@ public class GebruikersService {
     }
 
     public String inloggen(String emailadres, String wachtwoord) {
-        if (!emailadresBestaat(emailadres))  {
+        if (!emailadresBestaat(emailadres)) {
             return "EN";
-        } else if (!emailadresEnWachtwoordBestaat(emailadres, wachtwoord)){
+        } else if (!emailadresEnWachtwoordBestaat(emailadres, wachtwoord)) {
             return "WN";
         }
         log.info(String.format("Inloggen succesvol met emailadres: %s", emailadres));
         return "S";
     }
 
-    public Gebruiker registreren (String emailadres, String adres, List<Bezorgwijze> bezorgwijzen) {
+    public Gebruiker registreren(String emailadres, String adres, List<Bezorgwijze> bezorgwijzen) {
         Gebruiker gebruiker =
-        Gebruiker.builder()
-                .emailadres(emailadres)
-                .wachtwoord(new Wachtwoordgenerator().maakEenRandomWachtwoord())
-                .adres(adres)
-                .bezorgwijzen(bezorgwijzen)
-                .akkoordReglement("J").build();
+                Gebruiker.builder()
+                        .emailadres(emailadres)
+                        .wachtwoord(new Wachtwoordgenerator().maakEenRandomWachtwoord())
+                        .adres(adres)
+                        .bezorgwijzen(bezorgwijzen)
+                        .akkoordReglement("J").build();
 
         gebruikerDAO.opslaan(gebruiker);
         return gebruiker;
@@ -62,5 +62,19 @@ public class GebruikersService {
             log.info("Het wachtwoord is onjuist");
             return false;
         }
+    }
+
+    public Gebruiker zoekGebruiker(String emailadres) {
+        try {
+            return gebruikerDAO.zoekEmailadres(emailadres);
+        } catch (NoResultException e) {
+            log.debug(e.getClass().getSimpleName() + " : " + e.getMessage());
+            log.info("Het emailadres bestaat niet");
+            return null;
+        }
+    }
+
+    public void update(Gebruiker gebruiker) {
+        gebruikerDAO.updateGebruiker(gebruiker);
     }
 }

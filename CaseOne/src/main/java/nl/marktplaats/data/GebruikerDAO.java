@@ -52,4 +52,17 @@ public class GebruikerDAO {
     public List<Gebruiker> alleGebruikers() {
         return em.createNamedQuery("GebruikerEntity.alleGebruikers", Gebruiker.class).getResultList();
     }
+
+    public void updateGebruiker(Gebruiker gebruiker) {
+        try {
+            em.getTransaction().begin();
+            em.merge(gebruiker);
+            em.getTransaction().commit();
+            log.info(String.format("Nieuw product is opgeslagen", gebruiker.getProducten().get(gebruiker.getProducten().size()-1)));
+        } catch (Exception e) {
+            e.printStackTrace();
+            //log.warn(e.getClass().getSimpleName() + " : " + e.getMessage());
+            em.getTransaction().rollback();
+        }
+    }
 }

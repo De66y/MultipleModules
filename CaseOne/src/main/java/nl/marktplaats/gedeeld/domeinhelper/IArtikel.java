@@ -19,5 +19,5 @@ public interface IArtikel {
     void setBeschrijving(String beschrijving);
 
     List<Bezorgwijze> getBezorgopties();
-    void setBezorgopties(Bezorgwijze bezorgwijze);
+    void setBezorgopties(List<Bezorgwijze> bezorgopties);
 }

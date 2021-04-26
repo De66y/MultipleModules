@@ -4,7 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import nl.marktplaats.gedeeld.domeinhelper.IArtikel;
+
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -27,12 +30,21 @@ public class Gebruiker {
     @OneToMany
     private List<Bezorgwijze> bezorgwijzen;
 
+    @OneToMany (cascade = CascadeType.MERGE)
+    private List<Product> producten;
+
     public Gebruiker(String emailadres, String wachtwoord) {
         this.emailadres = emailadres;
         this.wachtwoord = wachtwoord;
+        producten = new ArrayList<>();
     }
 
     public void addBezorgwijze (Bezorgwijze bezorgwijze) {
         this.bezorgwijzen.add(bezorgwijze);
+    }
+
+    public void addProduct (Product product) {
+        this.producten.add(product);
+        product.setGebruiker(this);
     }
 }
