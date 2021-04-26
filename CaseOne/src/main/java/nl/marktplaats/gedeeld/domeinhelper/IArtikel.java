@@ -5,8 +5,9 @@ import nl.marktplaats.gedeeld.domeinmodel.Bezorgwijze;
 import java.util.List;
 
 public interface IArtikel {
+    int getId();
+
     SoortArtikel getSoortArtikel();
-    void setSoortArtikel(SoortArtikel soortArtikel);
 
     String getNaam();
     void setNaam(String naam);
