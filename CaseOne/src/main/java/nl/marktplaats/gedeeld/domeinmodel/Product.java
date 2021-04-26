@@ -9,15 +9,18 @@ import nl.marktplaats.gedeeld.domeinhelper.ProductCategorie;
 import nl.marktplaats.gedeeld.domeinhelper.SoortArtikel;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Data @AllArgsConstructor @Builder
+@Data @NoArgsConstructor @AllArgsConstructor @Builder
 public class Product implements IProduct {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private final SoortArtikel soortArtikel;
+    @Enumerated(EnumType.STRING)
+    private SoortArtikel soortArtikel;
+    @Enumerated(EnumType.STRING)
     private ProductCategorie productCategorie;
     private String naam;
     private double prijs;
@@ -25,7 +28,12 @@ public class Product implements IProduct {
     @OneToMany
     private List<Bezorgwijze> bezorgopties;
 
-    public Product() {
+    public Product(ProductCategorie productCategorie, String naam, double prijs, String beschrijving) {
+        this.productCategorie = productCategorie;
+        this.naam = naam;
+        this.prijs = prijs;
+        this.beschrijving = beschrijving;
+        this.bezorgopties = new ArrayList<>();
         this.soortArtikel = SoortArtikel.PRODUCT;
     }
 
