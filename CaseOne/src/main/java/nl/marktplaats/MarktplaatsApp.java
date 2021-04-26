@@ -25,23 +25,16 @@ public class MarktplaatsApp {
 
     public static void main(String[] args) {
         //Start van de applicatie
-        Fabriek fabriek = new Fabriek(
-                new BezorgwijzeService(
-                        new BezorgwijzeDAO(
-                                Persistence.createEntityManagerFactory("Productie").createEntityManager()
-                        ))); //@TODO em oplossen
-        //Deze maar 1 keer
-        fabriek.bezorgwijzeInDatabase();
+        Fabriek fabriek = new Fabriek();
+        fabriek.aanmakenDAOs();
+        fabriek.aanmakenServices();
+        fabriek.bezorgwijzeInDatabase(); //Deze maar 1 keer
 
-        //Moet voor nu nog worden aangemaakt
-        GebruikerDAO gebruikerDAO = new GebruikerDAO(fabriek.getEm());
-        GebruikersService gebruikersservice = new GebruikersService(gebruikerDAO);
-        //BezorgwijzeService bezorgwijzeService = fabriek.getBezorgwijzeService();
 
         //Standaard voor opslaan
-        gebruikerDAO.opslaan(new Gebruiker("Calimero", "Wachtwoord"));
-        gebruikerDAO.opslaan(new Gebruiker("Dotje", "Neus"));
-        gebruikerDAO.opslaan(new Gebruiker("Beer", "SnufSnuf"));
+        fabriek.getGebruikerDAO().opslaan(new Gebruiker("Calimero", "Wachtwoord"));
+        fabriek.getGebruikerDAO().opslaan(new Gebruiker("Dotje", "Neus"));
+        fabriek.getGebruikerDAO().opslaan(new Gebruiker("Beer", "SnufSnuf"));
 
 
         //TEST
@@ -53,18 +46,24 @@ public class MarktplaatsApp {
 
         //System.out.println(fabriek.getBezorgwijzeService().opslaan(new Bezorgwijze("Bezorgwijze 5")));
 
+        //new RegistreerMenu(fabriek.getGebruikersService(), fabriek.getBezorgwijzeService(), new Scanner(System.in)).showMenu();
+
         List<Bezorgwijze> bezorgwijzen = new ArrayList<>();
         bezorgwijzen.add(new Bezorgwijze("Versturen"));
         bezorgwijzen.add(new Bezorgwijze("Afhalen magazijn"));
 
         Product product = new Product(ProductCategorie.DUIKBENODIGDHEDEN, "Duikfles", 139.99, "Duikfles voor perslucht");
         Product product2 = new Product(ProductCategorie.DIERBENODIGDHEDEN, "Konijnenren", 20.00, "Ren 4m bij 2m ");
-        //product.setBezorgopties(bezorgwijzen);
 
         //new ProductDAO(fabriek.getEm()).opslaan(product);
 
-        new ProductService(new ProductDAO(fabriek.getEm()), gebruikersservice).productTeKoopAanbieden("Dotje", product);
-        new ProductService(new ProductDAO(fabriek.getEm()), gebruikersservice).productTeKoopAanbieden("Dotje", product2);
+        //List<Bezorgwijze> test = new ArrayList<>();
+        //test.add(new Bezorgwijze("Versturen"));
+        //test.add(new Bezorgwijze("Thuis afhalen bij verkoper"));
+
+
+        //new ProductService(new ProductDAO(fabriek.getEm()), gebruikersservice).productTeKoopAanbieden("Dotje", product, test);
+        //new ProductService(new ProductDAO(fabriek.getEm()), gebruikersservice).productTeKoopAanbieden("Dotje", product2, test);
 
 
 

@@ -14,6 +14,9 @@ import java.util.List;
 
 @Entity
 @Data @NoArgsConstructor @AllArgsConstructor @Builder
+@NamedQueries({
+        @NamedQuery(name= "ProductEntity.geefAlleProducten", query= "SELECT e FROM Product e WHERE e.id=:id")
+})
 public class Product implements IProduct {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

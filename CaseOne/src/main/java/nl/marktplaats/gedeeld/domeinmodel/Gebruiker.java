@@ -16,7 +16,7 @@ import java.util.List;
 @NamedQueries({
         @NamedQuery(name= "GebruikerEntity.alleGebruikers", query= "SELECT e FROM Gebruiker e"),
         @NamedQuery(name= "GebruikerEntity.zoekEmailadres", query= "SELECT e FROM Gebruiker e WHERE e.emailadres=:emailadres"),
-        @NamedQuery(name= "GebruikerEntity.zoekVolledigeGebruiker", query= "SELECT e FROM Gebruiker e WHERE e.emailadres=:gebruikersnaam AND e.wachtwoord=:wachtwoord")
+        @NamedQuery(name= "GebruikerEntity.zoekVolledigeGebruiker", query= "SELECT e FROM Gebruiker e WHERE e.emailadres=:gebruikersnaam AND e.wachtwoord=:wachtwoord"),
 })
 public class Gebruiker {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,13 +30,14 @@ public class Gebruiker {
     @OneToMany
     private List<Bezorgwijze> bezorgwijzen;
 
-    @OneToMany (cascade = CascadeType.MERGE)
+    @OneToMany (cascade = CascadeType.MERGE, orphanRemoval = true)
     private List<Product> producten;
 
     public Gebruiker(String emailadres, String wachtwoord) {
         this.emailadres = emailadres;
         this.wachtwoord = wachtwoord;
         producten = new ArrayList<>();
+        bezorgwijzen = new ArrayList<>();
     }
 
     public void addBezorgwijze (Bezorgwijze bezorgwijze) {
