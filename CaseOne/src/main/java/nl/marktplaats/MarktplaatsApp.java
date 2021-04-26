@@ -5,6 +5,7 @@ import nl.marktplaats.data.GebruikerDAO;
 import nl.marktplaats.data.ProductDAO;
 import nl.marktplaats.gedeeld.Fabriek;
 import nl.marktplaats.gedeeld.domeinhelper.ProductCategorie;
+import nl.marktplaats.gedeeld.domeinhelper.SoortArtikel;
 import nl.marktplaats.gedeeld.domeinmodel.Bezorgwijze;
 import nl.marktplaats.gedeeld.domeinmodel.Gebruiker;
 import nl.marktplaats.gedeeld.domeinmodel.Product;
@@ -49,13 +50,20 @@ public class MarktplaatsApp {
         //new RegistreerMenu(fabriek.getGebruikersService(), fabriek.getBezorgwijzeService(), new Scanner(System.in)).showMenu();
 
         List<Bezorgwijze> bezorgwijzen = new ArrayList<>();
-        bezorgwijzen.add(new Bezorgwijze("Versturen"));
-        bezorgwijzen.add(new Bezorgwijze("Afhalen magazijn"));
+        bezorgwijzen.add(fabriek.getBezorgwijzeService().alleBezorgwijzen().get(1));
+        bezorgwijzen.add(fabriek.getBezorgwijzeService().alleBezorgwijzen().get(2));
 
-        Product product = new Product(ProductCategorie.DUIKBENODIGDHEDEN, "Duikfles", 139.99, "Duikfles voor perslucht");
-        Product product2 = new Product(ProductCategorie.DIERBENODIGDHEDEN, "Konijnenren", 20.00, "Ren 4m bij 2m ");
+        //Product product = new Product(ProductCategorie.DUIKBENODIGDHEDEN, "Duikfles", 139.99, "Duikfles voor perslucht");
+        //Product product2 = new Product(ProductCategorie.DIERBENODIGDHEDEN, "Konijnenren", 20.00, "Ren 4m bij 2m ");
 
-        //new ProductDAO(fabriek.getEm()).opslaan(product);
+        new ProductService(fabriek.getProductDAO(), fabriek.getGebruikersService()).productTeKoopAanbieden("Dotje",
+                Product.builder().soortArtikel(SoortArtikel.PRODUCT)
+                .productCategorie(ProductCategorie.DUIKBENODIGDHEDEN)
+                .naam("Duikfles")
+                .prijs(139.99)
+                .beschrijving("Duikfles voor perslucht")
+                .bezorgopties(bezorgwijzen).build()
+        );
 
         //List<Bezorgwijze> test = new ArrayList<>();
         //test.add(new Bezorgwijze("Versturen"));

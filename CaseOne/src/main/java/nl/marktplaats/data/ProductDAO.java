@@ -21,7 +21,8 @@ public class ProductDAO {
             em.getTransaction().commit();
             log.info(String.format("Product met naam: %s is opgeslagen.", product.getNaam()));
         } catch (Exception e) {
-            log.warn(e.getClass().getSimpleName() + " : " + e.getMessage());
+            e.printStackTrace();
+            //log.warn(e.getClass().getSimpleName() + " : " + e.getMessage());
             em.getTransaction().rollback();
         }
     }

@@ -3,6 +3,7 @@ package nl.marktplaats.gedeeld;
 import lombok.Data;
 import nl.marktplaats.data.BezorgwijzeDAO;
 import nl.marktplaats.data.GebruikerDAO;
+import nl.marktplaats.data.ProductDAO;
 import nl.marktplaats.gedeeld.domeinmodel.Bezorgwijze;
 import nl.marktplaats.service.BezorgwijzeService;
 import nl.marktplaats.service.GebruikersService;
@@ -20,6 +21,8 @@ public class Fabriek {
     private GebruikersService gebruikersService;
     private GebruikerDAO gebruikerDAO;
 
+    private ProductDAO productDAO;
+
     public Fabriek() {
         this.em = Persistence.createEntityManagerFactory("Productie").createEntityManager();
     }
@@ -27,6 +30,7 @@ public class Fabriek {
     public void aanmakenDAOs() {
         this.bezorgwijzeDAO = new BezorgwijzeDAO(em);
         this.gebruikerDAO = new GebruikerDAO(em);
+        this.productDAO = new ProductDAO(em);
     }
     public void aanmakenServices() {
         this.bezorgwijzeService = new BezorgwijzeService(bezorgwijzeDAO);
