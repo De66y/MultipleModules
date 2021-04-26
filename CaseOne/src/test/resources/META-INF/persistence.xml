@@ -8,6 +8,7 @@
     <persistence-unit name="Test">
     <!-- Alle entity classes hier noemen -->
         <class>nl.marktplaats.gedeeld.domeinmodel.Gebruiker</class>
+        <class>nl.marktplaats.gedeeld.domeinmodel.Bezorgwijze</class>
 
         <properties>
             <property name="javax.persistence.jdbc.url" value="jdbc:h2:mem:test"/>

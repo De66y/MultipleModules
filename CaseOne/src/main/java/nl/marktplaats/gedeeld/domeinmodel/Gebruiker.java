@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import javax.persistence.*;
+import java.util.List;
 
 
 @Entity
@@ -23,8 +24,15 @@ public class Gebruiker {
     private String adres;
     private String akkoordReglement;
 
+    @OneToMany
+    private List<Bezorgwijze> bezorgwijzen;
+
     public Gebruiker(String emailadres, String wachtwoord) {
         this.emailadres = emailadres;
         this.wachtwoord = wachtwoord;
+    }
+
+    public void addBezorgwijze (Bezorgwijze bezorgwijze) {
+        this.bezorgwijzen.add(bezorgwijze);
     }
 }

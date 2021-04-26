@@ -1,11 +1,11 @@
 package nl.marktplaats.presentatie.submenu;
 
 import lombok.extern.log4j.Log4j2;
-import nl.marktplaats.data.BezorgwijzeEnum;
+import nl.marktplaats.gedeeld.domeinmodel.Bezorgwijze;
 import nl.marktplaats.presentatie.IMenu;
+import nl.marktplaats.service.BezorgwijzeService;
 import nl.marktplaats.service.GebruikersService;
 import nl.marktplaats.service.helper.DocumentLezer;
-import nl.marktplaats.service.helper.Wachtwoordgenerator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,10 +14,12 @@ import java.util.Scanner;
 @Log4j2
 public class RegistreerMenu  implements IMenu{
     private GebruikersService gebruikersService;
+    private BezorgwijzeService bezorgwijzeService;
     private final Scanner scanner;
 
-    public RegistreerMenu(GebruikersService gebruikersService, Scanner scanner) {
+    public RegistreerMenu(GebruikersService gebruikersService, BezorgwijzeService bezorgwijzeService, Scanner scanner) {
         this.gebruikersService = gebruikersService;
+        this.bezorgwijzeService = bezorgwijzeService;
         this.scanner = scanner;
     }
 
@@ -27,23 +29,23 @@ public class RegistreerMenu  implements IMenu{
         String emailadres = scanner.nextLine();
         if (gebruikersService.emailadresBestaat(emailadres)) showMenu();
 
-        List<BezorgwijzeEnum> bezorgwijzen = bezorgwijzenKiezen();
+        List<Bezorgwijze> bezorgwijzen = bezorgwijzenKiezen();
         String adres = adresOpvragen(bezorgwijzen);
 
         String akkoordReglement = akkoordMetReglement();
 
-        gebruikersService.registreren(emailadres, adres);
+        gebruikersService.registreren(emailadres, adres, bezorgwijzen);
     }
 
 
 
     private List bezorgwijzenKiezen() {
-        List<BezorgwijzeEnum> bezorgwijzeList = new ArrayList<>();
+        List<Bezorgwijze> bezorgwijzeList = new ArrayList<>();
         System.out.println("Geef nu aan welke bezorgwijzen u wilt toevoegen aan uw account: ");
 
         Scanner scanner = new Scanner(System.in);
 
-        for (BezorgwijzeEnum bezorgwijze : BezorgwijzeEnum.values()) {
+        for (Bezorgwijze bezorgwijze : bezorgwijzeService.alleBezorgwijzen() ) {
             System.out.println(bezorgwijze.getId() + "  ||  " + bezorgwijze.getOmschrijving());
             System.out.print("Deze bezorgwijze toevoegen aan uw account? J voor ja, N voor nee: ");
             String keuze = scanner.nextLine();
@@ -57,15 +59,17 @@ public class RegistreerMenu  implements IMenu{
         return bezorgwijzeList;
     }
 
-    private String adresOpvragen(List<BezorgwijzeEnum> bezorgwijzen) {
-        System.out.println("Wat is uw adres");
-        String adres = scanner.nextLine();
-        if (thuisAfhalenIsGekozen(bezorgwijzen) && adres.isEmpty()) adresOpvragen(bezorgwijzen);
+    private String adresOpvragen(List<Bezorgwijze> bezorgwijzen) {
+        String adres = "";
+        while(thuisAfhalenIsGekozen(bezorgwijzen) && adres.isEmpty()) {
+            System.out.println("Wat is uw adres");
+            adres = scanner.nextLine();
+        }
         return adres;
     }
 
-    private boolean thuisAfhalenIsGekozen(List<BezorgwijzeEnum> bezorgwijzen) {
-        return bezorgwijzen.stream().anyMatch(bezorgwijzeEnum -> bezorgwijzeEnum.getOmschrijving().equals("Thuis afhalen bij verkoper"));
+    private boolean thuisAfhalenIsGekozen(List<Bezorgwijze> bezorgwijzen) {
+        return bezorgwijzen.stream().anyMatch(bezorgwijze -> bezorgwijze.getOmschrijving().equals("Thuis afhalen bij verkoper"));
     }
 
     private String akkoordMetReglement() {

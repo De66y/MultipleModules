@@ -1,11 +1,10 @@
 package nl.marktplaats.service;
 
 import lombok.extern.log4j.Log4j2;
-import nl.marktplaats.data.BezorgwijzeEnum;
 import nl.marktplaats.data.GebruikerDAO;
+import nl.marktplaats.gedeeld.domeinmodel.Bezorgwijze;
 import nl.marktplaats.gedeeld.domeinmodel.Gebruiker;
 import nl.marktplaats.service.helper.Wachtwoordgenerator;
-
 import javax.persistence.NoResultException;
 import java.util.List;
 
@@ -28,20 +27,19 @@ public class GebruikersService {
         return "S";
     }
 
-    public Gebruiker registreren (String emailadres, String adres) {
+    public Gebruiker registreren (String emailadres, String adres, List<Bezorgwijze> bezorgwijzen) {
         Gebruiker gebruiker =
         Gebruiker.builder()
                 .emailadres(emailadres)
                 .wachtwoord(new Wachtwoordgenerator().maakEenRandomWachtwoord())
                 .adres(adres)
+                .bezorgwijzen(bezorgwijzen)
                 .akkoordReglement("J").build();
 
         gebruikerDAO.opslaan(gebruiker);
         return gebruiker;
 
     }
-
-
 
     public boolean emailadresBestaat(String emailadres) {
         try {

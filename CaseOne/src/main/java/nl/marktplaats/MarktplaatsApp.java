@@ -6,6 +6,7 @@ import nl.marktplaats.gedeeld.Fabriek;
 import nl.marktplaats.gedeeld.domeinmodel.Bezorgwijze;
 import nl.marktplaats.gedeeld.domeinmodel.Gebruiker;
 import nl.marktplaats.presentatie.submenu.RegistreerMenu;
+import nl.marktplaats.service.BezorgwijzeService;
 import nl.marktplaats.service.GebruikersService;
 import nl.marktplaats.service.helper.DocumentLezer;
 
@@ -16,23 +17,25 @@ import java.util.Scanner;
 
 public class MarktplaatsApp {
 
-    private static final EntityManager em = Persistence.createEntityManagerFactory("Productie").createEntityManager();
-
     public static void main(String[] args) {
         //Start van de applicatie
-        Fabriek fabriek = new Fabriek(new BezorgwijzeDAO(em)); //@TODO em oplossen
+        Fabriek fabriek = new Fabriek(
+                new BezorgwijzeService(
+                        new BezorgwijzeDAO(
+                                Persistence.createEntityManagerFactory("Productie").createEntityManager()
+                        ))); //@TODO em oplossen
         //Deze maar 1 keer
         fabriek.bezorgwijzeInDatabase();
 
-
         //Moet voor nu nog worden aangemaakt
-        GebruikerDAO gebruikerDAO = new GebruikerDAO(fabriek.getEm());
+        /*GebruikerDAO gebruikerDAO = new GebruikerDAO(fabriek.getEm());
         GebruikersService gebruikersservice = new GebruikersService(gebruikerDAO);
+        BezorgwijzeService bezorgwijzeService = fabriek.getBezorgwijzeService();*/
 
         //Standaard voor opslaan
-        gebruikerDAO.opslaan(new Gebruiker("Calimero", "Wachtwoord"));
+        /*gebruikerDAO.opslaan(new Gebruiker("Calimero", "Wachtwoord"));
         gebruikerDAO.opslaan(new Gebruiker("Dotje", "Neus"));
-        gebruikerDAO.opslaan(new Gebruiker("Beer", "SnufSnuf"));
+        gebruikerDAO.opslaan(new Gebruiker("Beer", "SnufSnuf"));*/
 
 
         //TEST
@@ -42,16 +45,7 @@ public class MarktplaatsApp {
         //gebruikerDAO.zoekEmailadresEnWachtwoord("h", "g");
         //System.out.println(gebruikersservice.inloggen("Dotje", "Neus"));
 
-
-
-        //RegistreerMenu registreerMenu = new RegistreerMenu(gebruikersservice);
-        //registreerMenu.showMenu(new Scanner(System.in));
-
-        //new RegistreerMenu(gebruikersservice, new Scanner(System.in)).showMenu();
-
-        //new RegistreerMenu(gebruikersservice, new Scanner(System.in)).showMenu();
-
-        //System.out.println(gebruikersservice.registreren("Testemail", "Testadres"));
+        System.out.println(fabriek.getBezorgwijzeService().opslaan(new Bezorgwijze("Bezorgwijze 5")));
 
 
     }
