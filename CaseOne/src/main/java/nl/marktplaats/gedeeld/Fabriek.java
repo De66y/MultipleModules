@@ -64,9 +64,22 @@ public class Fabriek {
 
         gebruikerDAO.opslaan(admin);
 
+        List<Bezorgwijze> testBezorgLijst = new ArrayList<>();
+        testBezorgLijst.add((bezorgwijzeService.alleBezorgwijzen().get(0)));
+        testBezorgLijst.add((bezorgwijzeService.alleBezorgwijzen().get(2)));
+        testBezorgLijst.add((bezorgwijzeService.alleBezorgwijzen().get(3)));
         productService.productTeKoopAanbieden(
                 gebruikerDAO.zoekEmailadres("admin"),
-                Product.builder().naam("Duikfles").build());
+                Product.builder().naam("Duikfles").bezorgopties(testBezorgLijst).productCategorie(ProductCategorie.DUIKBENODIGDHEDEN).soortArtikel(SoortArtikel.PRODUCT).prijs(50).build());
+
+        List<Bezorgwijze> testBezorgLijst2 = new ArrayList<>();
+        testBezorgLijst2.add((bezorgwijzeService.alleBezorgwijzen().get(2)));
+        testBezorgLijst2.add((bezorgwijzeService.alleBezorgwijzen().get(3)));
+        productService.productTeKoopAanbieden(
+                gebruikerDAO.zoekEmailadres("admin"),
+                Product.builder().naam("Harry Potter serie").bezorgopties(testBezorgLijst2).productCategorie(ProductCategorie.BOEKEN).soortArtikel(SoortArtikel.PRODUCT).prijs(80).build());
+
+
 
         //Gebruiker 2
         List<Bezorgwijze> bezorgwijzenRuby = new ArrayList<>();

@@ -59,18 +59,15 @@ public class Hoofdmenu implements IMenu, ISubMenu {
             } while (hoofdMenuDraait);
         } catch (InputMismatchException e) {
             log.debug(e.getClass().getSimpleName() + " : " + e.getMessage());
-            showMenu(new Scanner(System.in));
+            new Hoofdmenu(gebruiker, productService, gebruikersService, new Scanner(System.in));
         }
     }
 
     @Override
     public void showSubMenu(Scanner scanner) {
-        System.out.print("Geef de naam van het artikel: ");
-        String naam = scanner.nextLine();
-        System.out.print("Geef een beschrijving van het artikel: ");
-        String beschrijving = scanner.nextLine();
-        System.out.print("Wat wordt de vraagprijs: ");
-        double prijs = scanner.nextDouble();
+        String naam = vraagNaamProduct();
+        String beschrijving = vraagBeschrijvingProduct();
+        double prijs = vraagPrijsProduct();
 
         ProductCategorie productCategorie = kiesProductCategorie();
         List<Bezorgwijze> bezorgwijzenVoorProduct = bezorgwijzenKiezen();
@@ -86,9 +83,34 @@ public class Hoofdmenu implements IMenu, ISubMenu {
                         .bezorgopties(bezorgwijzenVoorProduct).build());
     }
 
-    private ProductCategorie kiesProductCategorie() {
-        //scanner = new Scanner(System.in);
+    private String vraagNaamProduct() {
+        String naam = "";
+        while (naam.isEmpty()){
+            System.out.print("Geef de naam van het artikel: ");
+            naam = scanner.nextLine();
+        }
+        return naam;
+    }
+    private String vraagBeschrijvingProduct() {
+        System.out.print("Geef een beschrijving van het artikel: ");
+        String beschrijving = scanner.nextLine();
+        return beschrijving;
 
+    }
+    private double vraagPrijsProduct() {
+        double prijs = 0.0;
+        try {
+            while (prijs == 0.0) {
+                System.out.print("Wat wordt de vraagprijs: ");
+                prijs = scanner.nextDouble();
+            }
+        }catch (InputMismatchException e) {
+            log.warn("Dit is geen geldig invoer.");
+            showSubMenu(new Scanner(System.in));
+        }
+        return prijs;
+    }
+    private ProductCategorie kiesProductCategorie() {
         int keuze = -1;
         Arrays.asList(ProductCategorie.values())
                 .forEach(productCategorie -> System.out.println(productCategorie.getId() + " " + productCategorie));
@@ -109,12 +131,8 @@ public class Hoofdmenu implements IMenu, ISubMenu {
         return null;
 
     }
-
-    //@TODO public maken
-    public List bezorgwijzenKiezen() {
+    private List bezorgwijzenKiezen() {
         List<Bezorgwijze> eigenBezorgWijzen = gebruikersService.vindEigenBezorgWijzen(gebruiker);
-        //List<Bezorgwijze> eigenBezorgWijzen = gebruikersService.vindEigenBezorgWijzen(gebruikersService.zoekGebruiker(gebruiker.getEmailadres()));
-
         List<Bezorgwijze> bezorgWijzenVoorProduct = new ArrayList<>();
 
         System.out.println("Geef nu aan welke bezorgwijzen u wilt toevoegen voor dit product: ");

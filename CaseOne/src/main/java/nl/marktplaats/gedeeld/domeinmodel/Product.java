@@ -9,6 +9,7 @@ import nl.marktplaats.gedeeld.domeinhelper.ProductCategorie;
 import nl.marktplaats.gedeeld.domeinhelper.SoortArtikel;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,7 +29,7 @@ public class Product implements IProduct {
     private String naam;
     private double prijs;
     private String beschrijving;
-    @OneToMany
+    @ManyToMany
     @Builder.Default
     private List<Bezorgwijze> bezorgopties = new ArrayList<>();
     @OneToOne

@@ -1,3 +1,4 @@
+
 package nl.marktplaats.presentatie;
 
 import lombok.extern.log4j.Log4j2;
@@ -56,7 +57,6 @@ public class RegistreerMenu implements  IMenu{
         }
         return bezorgwijzeList;
     }
-
     private String adresOpvragen(List<Bezorgwijze> bezorgwijzen, Scanner scanner) {
         String adres = "";
         while(thuisAfhalenIsGekozen(bezorgwijzen) && adres.isEmpty()) {
@@ -65,11 +65,9 @@ public class RegistreerMenu implements  IMenu{
         }
         return adres;
     }
-
     private boolean thuisAfhalenIsGekozen(List<Bezorgwijze> bezorgwijzen) {
         return bezorgwijzen.stream().anyMatch(bezorgwijze -> bezorgwijze.getOmschrijving().equals("Thuis afhalen bij verkoper"));
     }
-
     private String akkoordMetReglement() {
         new DocumentLezer().lees();
         System.out.println("Voor akkoord typ: J");
