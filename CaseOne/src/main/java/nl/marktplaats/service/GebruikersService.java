@@ -20,12 +20,12 @@ public class GebruikersService {
 
     public String inloggen(String emailadres, String wachtwoord) {
         if (!emailadresBestaat(emailadres)) {
-            return "EN";
+            return "Emailadres bestaat niet";
         } else if (!emailadresEnWachtwoordBestaat(emailadres, wachtwoord)) {
-            return "WN";
+            return "Wachtwoord niet juist";
         }
         log.info(String.format("Inloggen succesvol met emailadres: %s", emailadres));
-        return "S";
+        return "Succesvol";
     }
 
     public Gebruiker registreren(String emailadres, String adres, List<Bezorgwijze> bezorgwijzen) {

@@ -60,13 +60,13 @@ public class InlogMenu implements IMenu, ISubMenu {
 
     private void switchSubMenu(String emailadres, String wachtwoord) {
         switch (fabriek.getGebruikersService().inloggen(emailadres, wachtwoord)) {
-            case "EN":
+            case "Emailadres bestaat niet":
                 showMenu(new Scanner(System.in));
                 break;
-            case "WN":
+            case "Wachtwoord niet juist":
                 showMenu(new Scanner(System.in));
                 break;
-            case "S":
+            case "Succesvol":
                 new Hoofdmenu(fabriek.getGebruikersService().zoekGebruiker(emailadres),fabriek.getProductService(), fabriek.getGebruikersService(), new Scanner(System.in)).showMenu(new Scanner(System.in));
                 break;
         }

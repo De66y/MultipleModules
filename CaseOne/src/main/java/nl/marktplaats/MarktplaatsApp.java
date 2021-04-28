@@ -51,20 +51,18 @@ public class MarktplaatsApp {
         );
         System.out.println(testLijst);*/
 
-
-
         //Hoofdmenu vind eigen bezorgwijzen
-        new Hoofdmenu(
+        /*new Hoofdmenu(
                 fabriek.getGebruikerDAO().zoekEmailadres("Ruby@emailadres.nl"),
                 fabriek.getProductService(),
                 fabriek.getGebruikersService(),
                 new Scanner(System.in)
-        ).showSubMenu(new Scanner(System.in));
+        ).showSubMenu(new Scanner(System.in));*/
 
 
 
 
         //Officiële start
-        //new AanmeldMenu(fabriek).showMenu(new Scanner(System.in));
+        new AanmeldMenu(fabriek).showMenu(new Scanner(System.in));
     }
 }
