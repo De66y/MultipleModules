@@ -32,7 +32,7 @@ public class Hoofdmenu implements IMenu, ISubMenu {
         try {
             do {
                 System.out.printf("U bent in het %s.\nWaarmee kan ik u van dienst zijn: \n" +
-                                "1. -----UNDER CONSTRUCTION Product toevoegen -----\n" +
+                                "1. Product toevoegen\n" +
                                 "2. -----UNDER CONSTRUCTION Mijn producten inzien -----\n" +
                                 "3. -----UNDER CONSTRUCTION Product toevoegen aan mijn verlanglijstje-----\n" +
                                 "4. Terug naar het aanmeldmenu \n"
@@ -45,6 +45,7 @@ public class Hoofdmenu implements IMenu, ISubMenu {
                         showSubMenu(new Scanner(System.in));
                         break;
                     case 2:
+                        mijnPoductenInzien();
                         break;
                     case 3:
                         break;
@@ -150,6 +151,12 @@ public class Hoofdmenu implements IMenu, ISubMenu {
             bezorgwijzenKiezen();
         }
         return bezorgWijzenVoorProduct;
+    }
+
+    public void mijnPoductenInzien() {
+        gebruikersService.vindEigenProducten(gebruiker)
+                .stream()
+                .forEach(product -> System.out.println(product.getNaam() + " || " + product.getPrijs()));
     }
 
 }

@@ -3,6 +3,8 @@ package nl.marktplaats.data;
 import lombok.extern.log4j.Log4j2;
 import nl.marktplaats.gedeeld.domeinmodel.Bezorgwijze;
 import nl.marktplaats.gedeeld.domeinmodel.Gebruiker;
+import nl.marktplaats.gedeeld.domeinmodel.Product;
+
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import java.util.ArrayList;
@@ -70,6 +72,9 @@ public class GebruikerDAO {
 
     public List<Bezorgwijze> zoekEigenBezorgwijzen(Gebruiker gebruiker) {
         return gebruiker.getBezorgwijzen();
+    }
 
+    public List<Product> zoekEigenProducten(Gebruiker gebruiker) {
+        return gebruiker.getProducten();
     }
 }

@@ -4,6 +4,7 @@ import lombok.extern.log4j.Log4j2;
 import nl.marktplaats.data.GebruikerDAO;
 import nl.marktplaats.gedeeld.domeinmodel.Bezorgwijze;
 import nl.marktplaats.gedeeld.domeinmodel.Gebruiker;
+import nl.marktplaats.gedeeld.domeinmodel.Product;
 import nl.marktplaats.service.helper.Wachtwoordgenerator;
 import javax.persistence.NoResultException;
 import java.util.ArrayList;
@@ -79,7 +80,13 @@ public class GebruikersService {
         gebruikerDAO.updateGebruiker(gebruiker);
     }
 
+    //@TODO private zetten
     public List<Bezorgwijze> vindEigenBezorgWijzen(Gebruiker gebruiker) {
-        return gebruiker.getBezorgwijzen();
+        return gebruikerDAO.zoekEigenBezorgwijzen(gebruiker);
+    }
+
+    //@TODO private zetten
+    public List<Product> vindEigenProducten(Gebruiker gebruiker) {
+        return gebruikerDAO.zoekEigenProducten(gebruiker);
     }
 }

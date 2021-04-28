@@ -59,6 +59,16 @@ public class MarktplaatsApp {
                 new Scanner(System.in)
         ).showSubMenu(new Scanner(System.in));*/
 
+        //TEST EIGEN PRODUCTEN OPHALEN
+        Gebruiker gebruiker = gebruikerDAO.zoekEmailadres("admin");
+        List<Product> testLijst = fabriek.getGebruikersService().vindEigenProducten(gebruiker);
+        System.out.println(testLijst.size());
+        for (Product product : testLijst) {
+            System.out.println(product.getNaam());
+        }
+        //testLijst.stream().forEach(product -> System.out.println(product.getNaam()));
+
+
 
 
 
