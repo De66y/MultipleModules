@@ -1,23 +1,17 @@
 package nl.marktplaats;
 
-import nl.marktplaats.data.BezorgwijzeDAO;
 import nl.marktplaats.data.GebruikerDAO;
-import nl.marktplaats.data.ProductDAO;
 import nl.marktplaats.gedeeld.Fabriek;
 import nl.marktplaats.gedeeld.domeinhelper.ProductCategorie;
 import nl.marktplaats.gedeeld.domeinhelper.SoortArtikel;
 import nl.marktplaats.gedeeld.domeinmodel.Bezorgwijze;
 import nl.marktplaats.gedeeld.domeinmodel.Gebruiker;
 import nl.marktplaats.gedeeld.domeinmodel.Product;
-import nl.marktplaats.presentatie.submenu.RegistreerMenu;
-import nl.marktplaats.service.BezorgwijzeService;
+import nl.marktplaats.presentatie.AanmeldMenu;
+import nl.marktplaats.presentatie.Hoofdmenu;
 import nl.marktplaats.service.GebruikersService;
 import nl.marktplaats.service.ProductService;
-import nl.marktplaats.service.helper.DocumentLezer;
 
-import javax.persistence.EntityManager;
-import javax.persistence.Persistence;
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -29,52 +23,48 @@ public class MarktplaatsApp {
         Fabriek fabriek = new Fabriek();
         fabriek.aanmakenDAOs();
         fabriek.aanmakenServices();
-        fabriek.bezorgwijzeInDatabase(); //Deze maar 1 keer
+        fabriek.startDataInDatabase();
 
-
-        //Standaard voor opslaan
-        fabriek.getGebruikerDAO().opslaan(new Gebruiker("Calimero", "Wachtwoord"));
-        fabriek.getGebruikerDAO().opslaan(new Gebruiker("Dotje", "Neus"));
-        fabriek.getGebruikerDAO().opslaan(new Gebruiker("Beer", "SnufSnuf"));
-
-
-        //TEST
+        //TEST INLOGGEN
         //System.out.println(gebruikerDAO.zoekGebruikersnaamEnWachtwoord("Dotje","Neus"));
         //gebruikersservice.inloggen("Dotje", "Neus");
 
+        //TEST ZOEK OP EMAILADERS EN WACHTWOORD
         //gebruikerDAO.zoekEmailadresEnWachtwoord("h", "g");
         //System.out.println(gebruikersservice.inloggen("Dotje", "Neus"));
 
+        //TEST PROBEREN EEN VIJFDE BEZORGWIJZE OP TE SLAAN
         //System.out.println(fabriek.getBezorgwijzeService().opslaan(new Bezorgwijze("Bezorgwijze 5")));
 
-        //new RegistreerMenu(fabriek.getGebruikersService(), fabriek.getBezorgwijzeService(), new Scanner(System.in)).showMenu();
+        //EIGEN BEZORGWIJZELIJSTEN TESTTS
+        //Gebruikersdao vind eigen bezorgwijzen
+        GebruikerDAO gebruikerDAO = new GebruikerDAO(fabriek.getEm());
 
-        List<Bezorgwijze> bezorgwijzen = new ArrayList<>();
-        bezorgwijzen.add(fabriek.getBezorgwijzeService().alleBezorgwijzen().get(1));
-        bezorgwijzen.add(fabriek.getBezorgwijzeService().alleBezorgwijzen().get(2));
+        /*Gebruiker gebruiker = gebruikerDAO.zoekEmailadres("Ruby@emailadres.nl");
+        List<Bezorgwijze> testLijst1 = gebruikerDAO.zoekEigenBezorgwijzen(gebruiker);
+        System.out.println(testLijst1);*/
 
-        //Product product = new Product(ProductCategorie.DUIKBENODIGDHEDEN, "Duikfles", 139.99, "Duikfles voor perslucht");
-        //Product product2 = new Product(ProductCategorie.DIERBENODIGDHEDEN, "Konijnenren", 20.00, "Ren 4m bij 2m ");
-
-        new ProductService(fabriek.getProductDAO(), fabriek.getGebruikersService()).productTeKoopAanbieden("Dotje",
-                Product.builder().soortArtikel(SoortArtikel.PRODUCT)
-                .productCategorie(ProductCategorie.DUIKBENODIGDHEDEN)
-                .naam("Duikfles")
-                .prijs(139.99)
-                .beschrijving("Duikfles voor perslucht")
-                .bezorgopties(bezorgwijzen).build()
+        //Gebruikersservice vind eigen bezorgwijzen
+        /*List<Bezorgwijze> testLijst =
+        fabriek.getGebruikersService().vindEigenBezorgWijzen(
+                gebruikerDAO.zoekEmailadres("Ruby@emailadres.nl")
         );
-
-        //List<Bezorgwijze> test = new ArrayList<>();
-        //test.add(new Bezorgwijze("Versturen"));
-        //test.add(new Bezorgwijze("Thuis afhalen bij verkoper"));
-
-
-        //new ProductService(new ProductDAO(fabriek.getEm()), gebruikersservice).productTeKoopAanbieden("Dotje", product, test);
-        //new ProductService(new ProductDAO(fabriek.getEm()), gebruikersservice).productTeKoopAanbieden("Dotje", product2, test);
+        System.out.println(testLijst);*/
 
 
 
+        //Hoofdmenu vind eigen bezorgwijzen
+        new Hoofdmenu(
+                fabriek.getGebruikerDAO().zoekEmailadres("Ruby@emailadres.nl"),
+                fabriek.getProductService(),
+                fabriek.getGebruikersService(),
+                new Scanner(System.in)
+        ).showSubMenu(new Scanner(System.in));
 
+
+
+
+        //Officiële start
+        //new AanmeldMenu(fabriek).showMenu(new Scanner(System.in));
     }
 }

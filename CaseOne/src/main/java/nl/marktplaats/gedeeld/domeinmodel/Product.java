@@ -29,7 +29,8 @@ public class Product implements IProduct {
     private double prijs;
     private String beschrijving;
     @OneToMany
-    private List<Bezorgwijze> bezorgopties;
+    @Builder.Default
+    private List<Bezorgwijze> bezorgopties = new ArrayList<>();
     @OneToOne
     private Gebruiker gebruiker;
 
@@ -38,7 +39,6 @@ public class Product implements IProduct {
         this.naam = naam;
         this.prijs = prijs;
         this.beschrijving = beschrijving;
-        this.bezorgopties = new ArrayList<>();
         this.soortArtikel = SoortArtikel.PRODUCT;
     }
 

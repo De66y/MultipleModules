@@ -2,33 +2,29 @@ package nl.marktplaats.presentatie;
 
 import lombok.extern.log4j.Log4j2;
 import nl.marktplaats.gedeeld.Fabriek;
-import nl.marktplaats.presentatie.submenu.InlogMenu;
-import nl.marktplaats.presentatie.submenu.RegistreerMenu;
-import nl.marktplaats.service.GebruikersService;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 @Log4j2
-public class Menu1 implements IMenu{
+public class AanmeldMenu implements  IMenu{
     private final static String COMPANYNAME = "MarktByPlaats";
     private Fabriek fabriek;
-    private final Scanner scanner;
 
-    public Menu1(GebruikersService gebruikerService, Scanner scanner) {
-        this.scanner = scanner;
+    public AanmeldMenu(Fabriek fabriek) {
+        this.fabriek = fabriek;
     }
 
     @Override
-    public void showMenu() {
+    public void showMenu(Scanner scanner) {
         int keuze;
         boolean mainMenuIsRunning = true;
 
         try {
             do {
                 System.out.printf("Welkom bij %s!\nWaarmee kan ik u van dienst zijn: \n" +
-                                "1. -----UNDER CONSTRUCTION Inloggen----- \n" +
-                                "2. -----UNDER CONSTRUCTION Registreren -----\n" +
+                                "1. Inloggen \n" +
+                                "2. Registreren \n" +
                                 "3. Afsluiten.\n"
                         , COMPANYNAME);
                 System.out.print("Uw keuze: ");
@@ -37,11 +33,11 @@ public class Menu1 implements IMenu{
 
                 switch (keuze) {
                     case 1:
-                        new InlogMenu(fabriek.getGebruikersService(), scanner);
+                        new InlogMenu(fabriek, new Scanner(System.in)).showMenu(new Scanner(System.in));
                         break;
 
                     case 2:
-                        new RegistreerMenu(fabriek.getGebruikersService(), fabriek.getBezorgwijzeService(), scanner).showMenu();
+                        new RegistreerMenu(fabriek.getGebruikersService(), fabriek.getBezorgwijzeService(), new Scanner(System.in)).showMenu(new Scanner(System.in));
                         break;
 
                     case 3:
@@ -54,7 +50,7 @@ public class Menu1 implements IMenu{
             } while (mainMenuIsRunning);
         } catch (InputMismatchException e) {
             log.debug(e.getClass().getSimpleName() + " : " + e.getMessage());
-            showMenu();
+            showMenu(new Scanner(System.in));
         }
     }
 }

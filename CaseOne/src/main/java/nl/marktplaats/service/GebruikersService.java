@@ -6,6 +6,7 @@ import nl.marktplaats.gedeeld.domeinmodel.Bezorgwijze;
 import nl.marktplaats.gedeeld.domeinmodel.Gebruiker;
 import nl.marktplaats.service.helper.Wachtwoordgenerator;
 import javax.persistence.NoResultException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Log4j2
@@ -76,5 +77,9 @@ public class GebruikersService {
 
     public void update(Gebruiker gebruiker) {
         gebruikerDAO.updateGebruiker(gebruiker);
+    }
+
+    public List<Bezorgwijze> vindEigenBezorgWijzen(Gebruiker gebruiker) {
+        return gebruiker.getBezorgwijzen();
     }
 }

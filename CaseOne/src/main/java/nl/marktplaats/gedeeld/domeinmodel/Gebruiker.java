@@ -27,21 +27,16 @@ public class Gebruiker {
     private String adres;
     private String akkoordReglement;
 
-    @OneToMany
+    @ManyToMany
     private List<Bezorgwijze> bezorgwijzen;
 
-    @OneToMany (cascade = CascadeType.MERGE, orphanRemoval = true)
-    private List<Product> producten;
+    @OneToMany (cascade = CascadeType.MERGE)
+    @Builder.Default
+    private List<Product> producten = new ArrayList<>();
 
     public Gebruiker(String emailadres, String wachtwoord) {
         this.emailadres = emailadres;
         this.wachtwoord = wachtwoord;
-        producten = new ArrayList<>();
-        bezorgwijzen = new ArrayList<>();
-    }
-
-    public void addBezorgwijze (Bezorgwijze bezorgwijze) {
-        this.bezorgwijzen.add(bezorgwijze);
     }
 
     public void addProduct (Product product) {

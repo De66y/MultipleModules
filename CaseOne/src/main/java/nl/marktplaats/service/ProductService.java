@@ -7,7 +7,6 @@ import nl.marktplaats.gedeeld.domeinmodel.Bezorgwijze;
 import nl.marktplaats.gedeeld.domeinmodel.Gebruiker;
 import nl.marktplaats.gedeeld.domeinmodel.Product;
 
-import java.util.List;
 
 @Log4j2
 public class ProductService {
@@ -20,14 +19,8 @@ public class ProductService {
         this.gebruikersService = gebruikersService;
     }
 
-    public void productTeKoopAanbieden(String emailadres, Product product) {
-        if (gebruikersService.zoekGebruiker(emailadres).equals(null)) {
-            log.info("Er is een typfout gemaakt bij je emailadres.");
-        }
-
-        Gebruiker gebruiker = gebruikersService.zoekGebruiker(emailadres);
+    public void productTeKoopAanbieden(Gebruiker gebruiker, Product product) {
         gebruiker.addProduct(product);
-
         gebruikersService.update(gebruiker);
     }
 }

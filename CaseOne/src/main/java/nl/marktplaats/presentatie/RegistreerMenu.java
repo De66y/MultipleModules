@@ -1,4 +1,4 @@
-package nl.marktplaats.presentatie.submenu;
+package nl.marktplaats.presentatie;
 
 import lombok.extern.log4j.Log4j2;
 import nl.marktplaats.gedeeld.domeinmodel.Bezorgwijze;
@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Scanner;
 
 @Log4j2
-public class RegistreerMenu  implements IMenu{
+public class RegistreerMenu implements  IMenu{
     private GebruikersService gebruikersService;
     private BezorgwijzeService bezorgwijzeService;
     private final Scanner scanner;
@@ -24,20 +24,18 @@ public class RegistreerMenu  implements IMenu{
     }
 
     @Override
-    public void showMenu() {
+    public void showMenu(Scanner scanner) {
         System.out.print("Wat is uw emailadres: ");
         String emailadres = scanner.nextLine();
-        if (gebruikersService.emailadresBestaat(emailadres)) showMenu();
+        if (gebruikersService.emailadresBestaat(emailadres)) showMenu(new Scanner(System.in));
 
         List<Bezorgwijze> bezorgwijzen = bezorgwijzenKiezen();
-        String adres = adresOpvragen(bezorgwijzen);
+        String adres = adresOpvragen(bezorgwijzen, new Scanner(System.in));
 
         String akkoordReglement = akkoordMetReglement();
 
         gebruikersService.registreren(emailadres, adres, bezorgwijzen);
     }
-
-
 
     private List bezorgwijzenKiezen() {
         List<Bezorgwijze> bezorgwijzeList = new ArrayList<>();
@@ -59,7 +57,7 @@ public class RegistreerMenu  implements IMenu{
         return bezorgwijzeList;
     }
 
-    private String adresOpvragen(List<Bezorgwijze> bezorgwijzen) {
+    private String adresOpvragen(List<Bezorgwijze> bezorgwijzen, Scanner scanner) {
         String adres = "";
         while(thuisAfhalenIsGekozen(bezorgwijzen) && adres.isEmpty()) {
             System.out.println("Wat is uw adres");
