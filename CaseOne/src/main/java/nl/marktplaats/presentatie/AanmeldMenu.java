@@ -18,7 +18,7 @@ public class AanmeldMenu implements  IMenu{
     @Override
     public void showMenu(Scanner scanner) {
         int keuze;
-        boolean mainMenuIsRunning = true;
+        boolean aanmeldMenuDraait = true;
 
         try {
             do {
@@ -42,12 +42,12 @@ public class AanmeldMenu implements  IMenu{
 
                     case 3:
                         System.out.println("Tot de volgende keer :)");
-                        mainMenuIsRunning = false;
+                        aanmeldMenuDraait = false;
                         break;
                     default:
                         log.info("U heeft een keuze gemaakt die niet bestaat, kies opnieuw: ");
                 }
-            } while (mainMenuIsRunning);
+            } while (aanmeldMenuDraait);
         } catch (InputMismatchException e) {
             log.debug(e.getClass().getSimpleName() + " : " + e.getMessage());
             showMenu(new Scanner(System.in));

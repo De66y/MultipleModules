@@ -28,41 +28,41 @@ public class Hoofdmenu implements IMenu, ISubMenu {
     @Override
     public void showMenu(Scanner scanner) {
         int keuze;
+        boolean hoofdMenuDraait = true;
         try {
-            System.out.printf("U bent in het %s.\nWaarmee kan ik u van dienst zijn: \n" +
-                            "1. -----UNDER CONSTRUCTION Product toevoegen -----\n" +
-                            "2. -----UNDER CONSTRUCTION Mijn producten inzien -----\n" +
-                            "3. -----UNDER CONSTRUCTION Product toevoegen aan mijn verlanglijstje-----\n" +
-                            "4. Terug naar het aanmeldmenu \n"
-                    , this.getClass().getSimpleName());
-            System.out.print("Uw keuze: ");
-            keuze = scanner.nextInt();
+            do {
+                System.out.printf("U bent in het %s.\nWaarmee kan ik u van dienst zijn: \n" +
+                                "1. -----UNDER CONSTRUCTION Product toevoegen -----\n" +
+                                "2. -----UNDER CONSTRUCTION Mijn producten inzien -----\n" +
+                                "3. -----UNDER CONSTRUCTION Product toevoegen aan mijn verlanglijstje-----\n" +
+                                "4. Terug naar het aanmeldmenu \n"
+                        , this.getClass().getSimpleName());
+                System.out.print("Uw keuze: ");
+                keuze = scanner.nextInt();
 
-            switch (keuze) {
-                case 1:
-                    showSubMenu(new Scanner(System.in));
-                    break;
-                case 2:
-                    break;
-                case 3:
-                    break;
-                case 4:
-                    System.out.println("Tot de volgende keer :)");
-                    break;
-                default:
-                    log.info("U heeft een keuze gemaakt die niet bestaat, kies opnieuw: ");
-                    showMenu(new Scanner(System.in));
-            }
+                switch (keuze) {
+                    case 1:
+                        showSubMenu(new Scanner(System.in));
+                        break;
+                    case 2:
+                        break;
+                    case 3:
+                        break;
+                    case 4:
+                        System.out.println("Tot de volgende keer :)");
+                        hoofdMenuDraait = false;
+                        break;
+                    default:
+                        log.info("U heeft een keuze gemaakt die niet bestaat, kies opnieuw: ");
+                        showMenu(new Scanner(System.in));
+                }
+            } while (hoofdMenuDraait);
         } catch (InputMismatchException e) {
             log.debug(e.getClass().getSimpleName() + " : " + e.getMessage());
             showMenu(new Scanner(System.in));
         }
     }
 
-
-    //@TODO showsubmenu afmaken
-    //@TODO bezorgwijzen kiezen afmaken
-    //@TODO kiesProductCategorie afmaken
     @Override
     public void showSubMenu(Scanner scanner) {
         System.out.print("Geef de naam van het artikel: ");
