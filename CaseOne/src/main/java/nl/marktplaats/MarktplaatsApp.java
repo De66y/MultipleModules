@@ -2,17 +2,10 @@ package nl.marktplaats;
 
 import nl.marktplaats.data.GebruikerDAO;
 import nl.marktplaats.gedeeld.Fabriek;
-import nl.marktplaats.gedeeld.domeinhelper.ProductCategorie;
-import nl.marktplaats.gedeeld.domeinhelper.SoortArtikel;
-import nl.marktplaats.gedeeld.domeinmodel.Bezorgwijze;
 import nl.marktplaats.gedeeld.domeinmodel.Gebruiker;
 import nl.marktplaats.gedeeld.domeinmodel.Product;
 import nl.marktplaats.presentatie.AanmeldMenu;
-import nl.marktplaats.presentatie.Hoofdmenu;
-import nl.marktplaats.service.GebruikersService;
-import nl.marktplaats.service.ProductService;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -61,18 +54,42 @@ public class MarktplaatsApp {
 
         //TEST EIGEN PRODUCTEN OPHALEN
         Gebruiker gebruiker = gebruikerDAO.zoekEmailadres("admin");
-        List<Product> testLijst = fabriek.getGebruikersService().vindEigenProducten(gebruiker);
+        /*List<Product> testLijst = fabriek.getGebruikersService().vindEigenProducten(gebruiker);
         System.out.println(testLijst.size());
         for (Product product : testLijst) {
             System.out.println(product.getNaam());
-        }
+        }*/
         //testLijst.stream().forEach(product -> System.out.println(product.getNaam()));
 
+
+
+        //TEST verwijderen vanuit dao
+        /*System.out.println(fabriek.getProductDAO().alleProducten().size());
+        Product product = fabriek.getProductDAO().zoek(2);
+        System.out.println(product.getNaam());
+        fabriek.getProductService().verwijderProduct(gebruiker, product);*/
+
+        //System.out.println(fabriek.getProductDAO().alleProducten().size());
+
+        //TEST TOTALE LIJST VAN ALLE PRODUCTEN
+        //List<Product> lijst = fabriek.getProductDAO().alleProducten();
+        //System.out.println(lijst.size());
+
+        /*fabriek.getProductService().verwijderProduct(gebruiker,
+                fabriek.getProductDAO().zoek(2));
+
+        List<Product> lijst2 = fabriek.getProductDAO().alleProducten();
+        System.out.println(lijst2.size());*/
+
+        System.out.println(
+        fabriek.getProductService().isEigenProduct(gebruiker,
+                fabriek.getProductDAO().zoek(2))
+        );
 
 
 
 
         //Officiële start
-        new AanmeldMenu(fabriek).showMenu(new Scanner(System.in));
+        //new AanmeldMenu(fabriek).showMenu(new Scanner(System.in));
     }
 }

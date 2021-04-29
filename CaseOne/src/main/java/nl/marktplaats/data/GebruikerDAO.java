@@ -33,8 +33,8 @@ public class GebruikerDAO {
 
     public Gebruiker zoek(int id) {
         try {
-            Gebruiker boek = em.find(Gebruiker.class, id);
-            return boek;
+            Gebruiker gebruiker = em.find(Gebruiker.class, id);
+            return gebruiker;
         } catch (NullPointerException e) {
             log.warn("Gebruiker met id %s bestaat niet", id);
             return null;

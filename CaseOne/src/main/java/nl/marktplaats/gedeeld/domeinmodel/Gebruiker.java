@@ -4,8 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import nl.marktplaats.gedeeld.domeinhelper.IArtikel;
-
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -39,8 +37,15 @@ public class Gebruiker {
         this.wachtwoord = wachtwoord;
     }
 
-    public void addProduct (Product product) {
+    public void voegProductToe(Product product) {
         this.producten.add(product);
         product.setGebruiker(this);
+    }
+
+    //@TODO volgens mij doet hij het
+    public void verwijderProduct(Product product) {
+        product.setGebruiker(null);
+        this.producten.remove(product);
+
     }
 }

@@ -64,20 +64,20 @@ public class Fabriek {
 
         gebruikerDAO.opslaan(admin);
 
-        List<Bezorgwijze> testBezorgLijst = new ArrayList<>();
-        testBezorgLijst.add((bezorgwijzeService.alleBezorgwijzen().get(0)));
-        testBezorgLijst.add((bezorgwijzeService.alleBezorgwijzen().get(2)));
-        testBezorgLijst.add((bezorgwijzeService.alleBezorgwijzen().get(3)));
+        List<Bezorgwijze> productBezorgwijzen = new ArrayList<>();
+        productBezorgwijzen.add((bezorgwijzeService.alleBezorgwijzen().get(0)));
+        productBezorgwijzen.add((bezorgwijzeService.alleBezorgwijzen().get(2)));
+        productBezorgwijzen.add((bezorgwijzeService.alleBezorgwijzen().get(3)));
         productService.productTeKoopAanbieden(
                 gebruikerDAO.zoekEmailadres("admin"),
-                Product.builder().naam("Duikfles").bezorgopties(testBezorgLijst).productCategorie(ProductCategorie.DUIKBENODIGDHEDEN).soortArtikel(SoortArtikel.PRODUCT).prijs(50).build());
+                Product.builder().naam("Duikfles").bezorgopties(productBezorgwijzen).productCategorie(ProductCategorie.DUIKBENODIGDHEDEN).soortArtikel(SoortArtikel.PRODUCT).prijs(50).build());
 
-        List<Bezorgwijze> testBezorgLijst2 = new ArrayList<>();
-        testBezorgLijst2.add((bezorgwijzeService.alleBezorgwijzen().get(2)));
-        testBezorgLijst2.add((bezorgwijzeService.alleBezorgwijzen().get(3)));
+        List<Bezorgwijze> productBezorglijsten2 = new ArrayList<>();
+        productBezorglijsten2.add((bezorgwijzeService.alleBezorgwijzen().get(2)));
+        productBezorglijsten2.add((bezorgwijzeService.alleBezorgwijzen().get(3)));
         productService.productTeKoopAanbieden(
                 gebruikerDAO.zoekEmailadres("admin"),
-                Product.builder().naam("Harry Potter serie").bezorgopties(testBezorgLijst2).productCategorie(ProductCategorie.BOEKEN).soortArtikel(SoortArtikel.PRODUCT).prijs(80).build());
+                Product.builder().naam("Harry Potter serie").bezorgopties(productBezorglijsten2).productCategorie(ProductCategorie.BOEKEN).soortArtikel(SoortArtikel.PRODUCT).prijs(80).build());
 
 
 
@@ -92,6 +92,13 @@ public class Fabriek {
         bezorgwijzenVincent.add(bezorgwijzeService.alleBezorgwijzen().get(0));
         bezorgwijzenVincent.add(bezorgwijzeService.alleBezorgwijzen().get(2));
         gebruikersService.registreren("Vincent@emailadres.nl", "Leelooierstraat 22 Etten-Leur", bezorgwijzenVincent);
+
+        List<Bezorgwijze> productBezorglijsten3 = new ArrayList<>();
+        productBezorglijsten3.add((bezorgwijzeService.alleBezorgwijzen().get(2)));
+        productBezorglijsten3.add((bezorgwijzeService.alleBezorgwijzen().get(3)));
+        productService.productTeKoopAanbieden(
+                gebruikerDAO.zoekEmailadres("Vincent@emailadres.nl"),
+                Product.builder().naam("Kam").bezorgopties(productBezorglijsten3).productCategorie(ProductCategorie.DUIKBENODIGDHEDEN).soortArtikel(SoortArtikel.PRODUCT).prijs(0.90).build());
 
 
 

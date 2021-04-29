@@ -33,9 +33,10 @@ public class Hoofdmenu implements IMenu, ISubMenu {
             do {
                 System.out.printf("U bent in het %s.\nWaarmee kan ik u van dienst zijn: \n" +
                                 "1. Product toevoegen\n" +
-                                "2. -----UNDER CONSTRUCTION Mijn producten inzien -----\n" +
+                                "2. Mijn producten inzien\n" +
                                 "3. -----UNDER CONSTRUCTION Product toevoegen aan mijn verlanglijstje-----\n" +
-                                "4. Terug naar het aanmeldmenu \n"
+                                "4. -----UNDER CONSTRUCTION Product verwijderen-----\n" +
+                                "5. Terug naar het aanmeldmenu \n"
                         , this.getClass().getSimpleName());
                 System.out.print("Uw keuze: ");
                 keuze = scanner.nextInt();
@@ -53,6 +54,8 @@ public class Hoofdmenu implements IMenu, ISubMenu {
                         System.out.println("Tot de volgende keer :)");
                         hoofdMenuDraait = false;
                         break;
+                        case 5:
+                            break;
                     default:
                         log.info("U heeft een keuze gemaakt die niet bestaat, kies opnieuw: ");
                         showMenu(new Scanner(System.in));
@@ -83,7 +86,6 @@ public class Hoofdmenu implements IMenu, ISubMenu {
                         .gebruiker(gebruiker)
                         .bezorgopties(bezorgwijzenVoorProduct).build());
     }
-
     private String vraagNaamProduct() {
         String naam = "";
         while (naam.isEmpty()){
@@ -156,7 +158,13 @@ public class Hoofdmenu implements IMenu, ISubMenu {
     public void mijnPoductenInzien() {
         gebruikersService.vindEigenProducten(gebruiker)
                 .stream()
-                .forEach(product -> System.out.println(product.getNaam() + " || " + product.getPrijs()));
+                .forEach(product -> System.out.println(product.getId() + product.getNaam() + " || " + product.getPrijs()));
+    }
+
+    //@TODO afmaken
+    public void productVerwijderen() {
+        gebruikersService.vindEigenProducten(gebruiker).forEach(product -> System.out.println(product.getId() + " || " + product.getNaam()));
+
     }
 
 }
