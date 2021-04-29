@@ -33,7 +33,7 @@ public class Hoofdmenu implements IMenu, ISubMenu {
                 System.out.printf("U bent in het %s.\nWaarmee kan ik u van dienst zijn: \n" +
                                 "1. Product toevoegen\n" +
                                 "2. Mijn producten inzien\n" +
-                                "3. -----UNDER CONSTRUCTION Product toevoegen aan mijn verlanglijstje-----\n" +
+                                "3. ⚠️ \uD83D\uDC77\u200D Product toevoegen aan mijn verlanglijstje \uD83D\uDD28 \uD83D\uDD28 ⚠️\n" +
                                 "4. Product verwijderen\n" +
                                 "5. Terug naar het aanmeldmenu \n"
                         , this.getClass().getSimpleName());
