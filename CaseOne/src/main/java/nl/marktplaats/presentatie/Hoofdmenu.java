@@ -34,7 +34,7 @@ public class Hoofdmenu implements IMenu, ISubMenu {
                                 "1. Product toevoegen\n" +
                                 "2. Mijn producten inzien\n" +
                                 "3. -----UNDER CONSTRUCTION Product toevoegen aan mijn verlanglijstje-----\n" +
-                                "4. -----UNDER CONSTRUCTION Product verwijderen-----\n" +
+                                "4. Product verwijderen\n" +
                                 "5. Terug naar het aanmeldmenu \n"
                         , this.getClass().getSimpleName());
                 System.out.print("Uw keuze: ");
@@ -87,7 +87,6 @@ public class Hoofdmenu implements IMenu, ISubMenu {
                         .gebruiker(gebruiker)
                         .bezorgopties(bezorgwijzenVoorProduct).build());
     }
-
     private String vraagNaamProduct() {
         String naam = "";
         while (naam.isEmpty()){
@@ -98,10 +97,10 @@ public class Hoofdmenu implements IMenu, ISubMenu {
     }
     private String vraagBeschrijvingProduct() {
         System.out.print("Geef een beschrijving van het artikel: ");
-        String beschrijving = scanner.nextLine();
-        return beschrijving;
+        return scanner.nextLine();
 
     }
+    //@TODO mooier maken. leeg laten en letter invoeren
     private double vraagPrijsProduct() {
         double prijs = 0.0;
         try {
@@ -115,6 +114,7 @@ public class Hoofdmenu implements IMenu, ISubMenu {
         }
         return prijs;
     }
+    //@TODO mooier maken
     private ProductCategorie kiesProductCategorie() {
         int keuze = -1;
         Arrays.asList(ProductCategorie.values())
@@ -131,30 +131,27 @@ public class Hoofdmenu implements IMenu, ISubMenu {
 
         } catch (InputMismatchException e) {
             log.debug(e.getClass().getSimpleName() + " : " + e.getMessage());
-            kiesProductCategorie();
         }
         return null;
 
     }
     private List bezorgwijzenKiezen() {
         List<Bezorgwijze> eigenBezorgWijzen = gebruikersService.vindEigenBezorgWijzen(gebruiker);
-        List<Bezorgwijze> bezorgWijzenVoorProduct = new ArrayList<>();
+        List<Bezorgwijze> bezorgwijzenVoorProduct = new ArrayList<>();
 
-        System.out.println("Geef nu aan welke bezorgwijzen u wilt toevoegen voor dit product: ");
-        Scanner scanner = new Scanner(System.in);
+        while (bezorgwijzenVoorProduct.size()==0) {
+            System.out.println("Geef nu aan welke bezorgwijzen u wilt toevoegen voor dit product: ");
+            Scanner scanner = new Scanner(System.in);
 
-        for (Bezorgwijze bezorgwijze : eigenBezorgWijzen ) {
-            System.out.println(bezorgwijze.getId() + "  ||  " + bezorgwijze.getOmschrijving());
-            System.out.print("Deze bezorgwijze toevoegen voor dit product? J voor ja, N voor nee: ");
-            String keuze = scanner.nextLine();
-            if (keuze.equals("J")) bezorgWijzenVoorProduct.add(bezorgwijze);
+            for (Bezorgwijze bezorgwijze : eigenBezorgWijzen) {
+                System.out.println(bezorgwijze.getId() + "  ||  " + bezorgwijze.getOmschrijving());
+                System.out.print("Deze bezorgwijze toevoegen voor dit product? J voor ja, N voor nee: ");
+                String keuze = scanner.nextLine();
+                if (keuze.equals("J")) bezorgwijzenVoorProduct.add(bezorgwijze);
+            }
+            if (bezorgwijzenVoorProduct.size() == 0) log.info("Je moet minimaal 1 bezorgwijze kiezen.");
         }
-
-        if(bezorgWijzenVoorProduct.size()==0) {
-            log.info("Je moet minimaal 1 bezorgwijze kiezen.");
-            bezorgwijzenKiezen();
-        }
-        return bezorgWijzenVoorProduct;
+        return bezorgwijzenVoorProduct;
     }
 
     public void mijnPoductenInzien() {

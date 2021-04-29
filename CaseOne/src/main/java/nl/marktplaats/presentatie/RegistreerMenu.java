@@ -32,7 +32,6 @@ public class RegistreerMenu implements  IMenu{
         akkoordMetReglement();
         gebruikersService.registreren(emailadres, adres, bezorgwijzen);
     }
-
     private String emailadresOpgeven(){
         String emailadres = "";
         while (emailadres.isEmpty()) {
@@ -44,19 +43,14 @@ public class RegistreerMenu implements  IMenu{
     private List bezorgwijzenKiezen() {
         List<Bezorgwijze> bezorgwijzeList = new ArrayList<>();
         System.out.println("Geef nu aan welke bezorgwijzen u wilt toevoegen aan uw account: ");
-
-        Scanner scanner = new Scanner(System.in);
-
-        for (Bezorgwijze bezorgwijze : bezorgwijzeService.alleBezorgwijzen() ) {
-            System.out.println(bezorgwijze.getId() + "  ||  " + bezorgwijze.getOmschrijving());
-            System.out.print("Deze bezorgwijze toevoegen aan uw account? J voor ja, N voor nee: ");
-            String keuze = scanner.nextLine();
-            if (keuze.equals("J")) bezorgwijzeList.add(bezorgwijze);
-        }
-
-        if(bezorgwijzeList.size()==0) {
-            log.info("Je moet minimaal 1 bezorgwijze kiezen.");
-            bezorgwijzenKiezen();
+        while (bezorgwijzeList.size()==0) {
+            for (Bezorgwijze bezorgwijze : bezorgwijzeService.alleBezorgwijzen()) {
+                System.out.println(bezorgwijze.getId() + "  ||  " + bezorgwijze.getOmschrijving());
+                System.out.print("Deze bezorgwijze toevoegen aan uw account? J voor ja, N voor nee: ");
+                String keuze = scanner.nextLine();
+                if (keuze.equals("J")) bezorgwijzeList.add(bezorgwijze);
+            }
+            if (bezorgwijzeList.size() == 0) log.warn("Je moet minimaal 1 bezorgwijze kiezen.");
         }
         return bezorgwijzeList;
     }
