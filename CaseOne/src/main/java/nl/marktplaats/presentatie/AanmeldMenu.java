@@ -2,7 +2,6 @@ package nl.marktplaats.presentatie;
 
 import lombok.extern.log4j.Log4j2;
 import nl.marktplaats.gedeeld.Fabriek;
-
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -33,13 +32,11 @@ public class AanmeldMenu implements  IMenu{
 
                 switch (keuze) {
                     case 1:
-                        new InlogMenu(fabriek, new Scanner(System.in)).showMenu(new Scanner(System.in));
+                        new InlogMenu(fabriek.getGebruikersService(), fabriek.getProductService(), new Scanner(System.in)).showMenu(new Scanner(System.in));
                         break;
-
                     case 2:
                         new RegistreerMenu(fabriek.getGebruikersService(), fabriek.getBezorgwijzeService(), new Scanner(System.in)).showMenu(new Scanner(System.in));
                         break;
-
                     case 3:
                         System.out.println("Tot de volgende keer :)");
                         aanmeldMenuDraait = false;

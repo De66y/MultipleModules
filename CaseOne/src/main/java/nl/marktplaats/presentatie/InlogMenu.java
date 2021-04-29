@@ -1,22 +1,20 @@
 package nl.marktplaats.presentatie;
 
 import lombok.extern.log4j.Log4j2;
-import nl.marktplaats.gedeeld.Fabriek;
-import nl.marktplaats.presentatie.Hoofdmenu;
-import nl.marktplaats.presentatie.IMenu;
-import nl.marktplaats.presentatie.ISubMenu;
 import nl.marktplaats.service.GebruikersService;
-
+import nl.marktplaats.service.ProductService;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 @Log4j2
 public class InlogMenu implements IMenu, ISubMenu {
-    private Fabriek fabriek;
+    private GebruikersService gebruikersService;
+    private ProductService productService;
     private Scanner scanner;
 
-    public InlogMenu(Fabriek fabriek, Scanner scanner) {
-        this.fabriek = fabriek;
+    public InlogMenu(GebruikersService gebruikersService, ProductService productService, Scanner scanner) {
+        this.gebruikersService = gebruikersService;
+        this.productService = productService;
         this.scanner = scanner;
     }
 
@@ -52,14 +50,14 @@ public class InlogMenu implements IMenu, ISubMenu {
     public void showSubMenu(Scanner scanner) {
         System.out.print("Wat is uw emailadres: ");
         String emailadres = scanner.nextLine();
-        System.out.print("\nWat is uw wachtwoord: ");
+        System.out.print("Wat is uw wachtwoord: ");
         String wachtwoord = scanner.nextLine();
 
         switchSubMenu(emailadres, wachtwoord);
     }
 
     private void switchSubMenu(String emailadres, String wachtwoord) {
-        switch (fabriek.getGebruikersService().inloggen(emailadres, wachtwoord)) {
+        switch (gebruikersService.inloggen(emailadres, wachtwoord)) {
             case "Emailadres bestaat niet":
                 showMenu(new Scanner(System.in));
                 break;
@@ -67,7 +65,9 @@ public class InlogMenu implements IMenu, ISubMenu {
                 showMenu(new Scanner(System.in));
                 break;
             case "Succesvol":
-                new Hoofdmenu(fabriek.getGebruikersService().zoekGebruiker(emailadres),fabriek.getProductService(), fabriek.getGebruikersService(), new Scanner(System.in)).showMenu(new Scanner(System.in));
+                new Hoofdmenu(gebruikersService.zoekGebruiker(emailadres),
+                        productService, gebruikersService,
+                        new Scanner(System.in)).showMenu(new Scanner(System.in));
                 break;
         }
     }

@@ -1,13 +1,10 @@
-
 package nl.marktplaats.presentatie;
 
 import lombok.extern.log4j.Log4j2;
 import nl.marktplaats.gedeeld.domeinmodel.Bezorgwijze;
-import nl.marktplaats.presentatie.IMenu;
 import nl.marktplaats.service.BezorgwijzeService;
 import nl.marktplaats.service.GebruikersService;
-import nl.marktplaats.service.helper.DocumentLezer;
-
+import nl.marktplaats.gedeeld.helper.DocumentLezer;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -26,18 +23,24 @@ public class RegistreerMenu implements  IMenu{
 
     @Override
     public void showMenu(Scanner scanner) {
-        System.out.print("Wat is uw emailadres: ");
-        String emailadres = scanner.nextLine();
+        String emailadres = emailadresOpgeven();
+
         if (gebruikersService.emailadresBestaat(emailadres)) showMenu(new Scanner(System.in));
 
         List<Bezorgwijze> bezorgwijzen = bezorgwijzenKiezen();
         String adres = adresOpvragen(bezorgwijzen, new Scanner(System.in));
-
-        String akkoordReglement = akkoordMetReglement();
-
+        akkoordMetReglement();
         gebruikersService.registreren(emailadres, adres, bezorgwijzen);
     }
 
+    private String emailadresOpgeven(){
+        String emailadres = "";
+        while (emailadres.isEmpty()) {
+            System.out.println("Wat is uw emailadres");
+            emailadres = scanner.nextLine();
+        }
+        return emailadres;
+    }
     private List bezorgwijzenKiezen() {
         List<Bezorgwijze> bezorgwijzeList = new ArrayList<>();
         System.out.println("Geef nu aan welke bezorgwijzen u wilt toevoegen aan uw account: ");
@@ -58,9 +61,11 @@ public class RegistreerMenu implements  IMenu{
         return bezorgwijzeList;
     }
     private String adresOpvragen(List<Bezorgwijze> bezorgwijzen, Scanner scanner) {
-        String adres = "";
+        System.out.println("Wat is uw adres: ");
+        String adres = scanner.nextLine();
+
         while(thuisAfhalenIsGekozen(bezorgwijzen) && adres.isEmpty()) {
-            System.out.println("Wat is uw adres");
+            System.out.println("Wat is uw adres: ");
             adres = scanner.nextLine();
         }
         return adres;

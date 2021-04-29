@@ -1,4 +1,4 @@
-package nl.marktplaats.service.helper;
+package nl.marktplaats.gedeeld.helper;
 
 import java.util.Random;
 

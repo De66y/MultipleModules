@@ -42,9 +42,8 @@ public class Gebruiker {
         product.setGebruiker(this);
     }
 
-    //@TODO volgens mij doet hij het
     public void verwijderProduct(Product product) {
-        product.setGebruiker(null);
+        product.setGebruiker(null); //Naar null ivm de parent-child relatie
         this.producten.remove(product);
 
     }

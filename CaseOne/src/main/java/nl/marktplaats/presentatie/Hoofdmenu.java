@@ -8,7 +8,6 @@ import nl.marktplaats.gedeeld.domeinmodel.Gebruiker;
 import nl.marktplaats.gedeeld.domeinmodel.Product;
 import nl.marktplaats.service.GebruikersService;
 import nl.marktplaats.service.ProductService;
-
 import java.util.*;
 
 @Log4j2
@@ -49,12 +48,14 @@ public class Hoofdmenu implements IMenu, ISubMenu {
                         mijnPoductenInzien();
                         break;
                     case 3:
+                        log.error("UNDER CONSTRUCTION");
                         break;
                     case 4:
-                        System.out.println("Tot de volgende keer :)");
-                        hoofdMenuDraait = false;
+                        mijnProductVerwijderen();
                         break;
                         case 5:
+                            System.out.println("Tot de volgende keer :)");
+                            hoofdMenuDraait = false;
                             break;
                     default:
                         log.info("U heeft een keuze gemaakt die niet bestaat, kies opnieuw: ");
@@ -86,6 +87,7 @@ public class Hoofdmenu implements IMenu, ISubMenu {
                         .gebruiker(gebruiker)
                         .bezorgopties(bezorgwijzenVoorProduct).build());
     }
+
     private String vraagNaamProduct() {
         String naam = "";
         while (naam.isEmpty()){
@@ -158,13 +160,13 @@ public class Hoofdmenu implements IMenu, ISubMenu {
     public void mijnPoductenInzien() {
         gebruikersService.vindEigenProducten(gebruiker)
                 .stream()
-                .forEach(product -> System.out.println(product.getId() + product.getNaam() + " || " + product.getPrijs()));
+                .forEach(product -> System.out.println(product.getId() +" || "+ product.getNaam() + " || " + product.getPrijs()));
     }
-
-    //@TODO afmaken
-    public void productVerwijderen() {
-        gebruikersService.vindEigenProducten(gebruiker).forEach(product -> System.out.println(product.getId() + " || " + product.getNaam()));
-
+    public void mijnProductVerwijderen() {
+        mijnPoductenInzien();
+        System.out.println("Geef het nummer op van het product welke je wilt verwijderen: ");
+        int keuze = scanner.nextInt();
+        productService.verwijderProduct(gebruiker, productService.zoekProduct(keuze));
     }
 
 }

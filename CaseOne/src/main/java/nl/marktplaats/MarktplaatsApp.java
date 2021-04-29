@@ -81,15 +81,27 @@ public class MarktplaatsApp {
         List<Product> lijst2 = fabriek.getProductDAO().alleProducten();
         System.out.println(lijst2.size());*/
 
-        System.out.println(
+        //TEST IS PRODUCT EIGEN PRODUCT
+        /*System.out.println(
         fabriek.getProductService().isEigenProduct(gebruiker,
                 fabriek.getProductDAO().zoek(2))
-        );
+        );*/
 
+        //TEST VERWIJDEREN PRODUCT
+        /*System.out.println(fabriek.getProductDAO().alleProducten().size());
+        fabriek.getProductService().verwijderProduct(gebruiker,
+                fabriek.getProductDAO().zoek(3));
+        System.out.println(fabriek.getProductDAO().alleProducten().size());*/
 
+        //TEST VERWIJDEREN PRODUCT BIJ GBRUIKER WAAR MAAR 1 PRODUCT IS. GEBRUIKER BLIJFT BESTAAN!!!:D
+        /*Gebruiker gebruiker1 = gebruikerDAO.zoekEmailadres("Vincent@emailadres.nl");
+        System.out.println(fabriek.getProductDAO().alleProducten().size());
+        fabriek.getProductService().verwijderProduct(gebruiker1,
+                fabriek.getProductDAO().zoek(3));
+        System.out.println(fabriek.getProductDAO().alleProducten().size());*/
 
 
         //Officiële start
-        //new AanmeldMenu(fabriek).showMenu(new Scanner(System.in));
+        new AanmeldMenu(fabriek).showMenu(new Scanner(System.in));
     }
 }

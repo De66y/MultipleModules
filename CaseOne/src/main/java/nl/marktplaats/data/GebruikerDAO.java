@@ -70,6 +70,14 @@ public class GebruikerDAO {
         }
     }
 
+    public void voegProductToe(Gebruiker gebruiker, Product product) {
+        gebruiker.voegProductToe(product);
+    }
+
+    public void verwijderProduct(Gebruiker gebruiker, Product product) {
+        gebruiker.verwijderProduct(product);
+    }
+
     public List<Bezorgwijze> zoekEigenBezorgwijzen(Gebruiker gebruiker) {
         return gebruiker.getBezorgwijzen();
     }
