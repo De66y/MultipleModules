@@ -4,7 +4,7 @@ import lombok.extern.log4j.Log4j2;
 import nl.marktplaats.gedeeld.domeinmodel.Bezorgwijze;
 import nl.marktplaats.service.BezorgwijzeService;
 import nl.marktplaats.service.GebruikersService;
-import nl.marktplaats.gedeeld.helper.DocumentLezer;
+import nl.marktplaats.service.helper.DocumentLezer;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;

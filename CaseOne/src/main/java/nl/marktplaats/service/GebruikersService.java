@@ -5,7 +5,7 @@ import nl.marktplaats.data.GebruikerDAO;
 import nl.marktplaats.gedeeld.domeinmodel.Bezorgwijze;
 import nl.marktplaats.gedeeld.domeinmodel.Gebruiker;
 import nl.marktplaats.gedeeld.domeinmodel.Product;
-import nl.marktplaats.gedeeld.helper.Wachtwoordgenerator;
+import nl.marktplaats.service.helper.Wachtwoordgenerator;
 import javax.persistence.NoResultException;
 import java.util.List;
 
