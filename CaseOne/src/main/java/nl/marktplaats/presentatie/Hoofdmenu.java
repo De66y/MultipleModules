@@ -100,7 +100,6 @@ public class Hoofdmenu implements IMenu, ISubMenu {
         return scanner.nextLine();
 
     }
-    //@TODO mooier maken. leeg laten en letter invoeren
     private double vraagPrijsProduct() {
         double prijs = 0.0;
         try {
@@ -114,7 +113,6 @@ public class Hoofdmenu implements IMenu, ISubMenu {
         }
         return prijs;
     }
-    //@TODO mooier maken
     private ProductCategorie kiesProductCategorie() {
         int keuze = -1;
         Arrays.asList(ProductCategorie.values())
