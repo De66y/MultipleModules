@@ -7,9 +7,7 @@ import lombok.NoArgsConstructor;
 import nl.marktplaats.gedeeld.domeinhelper.IProduct;
 import nl.marktplaats.gedeeld.domeinhelper.ProductCategorie;
 import nl.marktplaats.gedeeld.domeinhelper.SoortArtikel;
-
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,14 +32,6 @@ public class Product implements IProduct {
     private List<Bezorgwijze> bezorgopties = new ArrayList<>();
     @OneToOne
     private Gebruiker gebruiker;
-
-    public Product(ProductCategorie productCategorie, String naam, double prijs, String beschrijving) {
-        this.productCategorie = productCategorie;
-        this.naam = naam;
-        this.prijs = prijs;
-        this.beschrijving = beschrijving;
-        this.soortArtikel = SoortArtikel.PRODUCT;
-    }
 
     @Override public ProductCategorie getProductCategorie() {
         return productCategorie;

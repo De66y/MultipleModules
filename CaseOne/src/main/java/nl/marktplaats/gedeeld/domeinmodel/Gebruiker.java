@@ -8,7 +8,6 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-
 @Entity
 @Data @NoArgsConstructor @AllArgsConstructor @Builder
 @NamedQueries({
@@ -19,15 +18,12 @@ import java.util.List;
 public class Gebruiker {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
     private String emailadres;
     private String wachtwoord;
     private String adres;
     private String akkoordReglement;
-
     @ManyToMany
     private List<Bezorgwijze> bezorgwijzen;
-
     @OneToMany (cascade = CascadeType.MERGE)
     @Builder.Default
     private List<Product> producten = new ArrayList<>();
@@ -41,10 +37,8 @@ public class Gebruiker {
         this.producten.add(product);
         product.setGebruiker(this);
     }
-
     public void verwijderProduct(Product product) {
         product.setGebruiker(null); //Naar null ivm de parent-child relatie
         this.producten.remove(product);
-
     }
 }

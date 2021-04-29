@@ -12,7 +12,6 @@ import nl.marktplaats.gedeeld.domeinmodel.Product;
 import nl.marktplaats.service.BezorgwijzeService;
 import nl.marktplaats.service.GebruikersService;
 import nl.marktplaats.service.ProductService;
-
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,15 +22,16 @@ public class Fabriek {
 
     private BezorgwijzeService bezorgwijzeService;
     private BezorgwijzeDAO bezorgwijzeDAO;
-
     private GebruikersService gebruikersService;
     private GebruikerDAO gebruikerDAO;
-
     private ProductService productService;
     private ProductDAO productDAO;
 
     public Fabriek() {
         this.em = Persistence.createEntityManagerFactory("Productie").createEntityManager();
+    }
+    public EntityManager getEm() {
+        return em;
     }
 
     public void aanmakenDAOs() {
@@ -45,10 +45,16 @@ public class Fabriek {
         this.productService = new ProductService(productDAO, gebruikersService);
     }
 
-    public EntityManager getEm() {
-        return em;
+    private void bezorgwijzeInDatabase () {
+        bezorgwijzeService.opslaan(
+                Bezorgwijze.builder().omschrijving("Afhalen magazijn").build());
+        bezorgwijzeService.opslaan(
+                Bezorgwijze.builder().omschrijving("Thuis afhalen bij verkoper").build());
+        bezorgwijzeService.opslaan(
+                Bezorgwijze.builder().omschrijving("Versturen").build());
+        bezorgwijzeService.opslaan(
+                Bezorgwijze.builder().omschrijving("Versturen onder rembours").build());
     }
-
     public void startDataInDatabase() {
         bezorgwijzeInDatabase();
 
@@ -79,8 +85,6 @@ public class Fabriek {
                 gebruikerDAO.zoekEmailadres("admin"),
                 Product.builder().naam("Harry Potter serie").bezorgopties(productBezorglijsten2).productCategorie(ProductCategorie.BOEKEN).soortArtikel(SoortArtikel.PRODUCT).prijs(80).build());
 
-
-
         //Gebruiker 2
         List<Bezorgwijze> bezorgwijzenRuby = new ArrayList<>();
         bezorgwijzenRuby.add(bezorgwijzeService.alleBezorgwijzen().get(1));
@@ -99,20 +103,5 @@ public class Fabriek {
         productService.productTeKoopAanbieden(
                 gebruikerDAO.zoekEmailadres("Vincent@emailadres.nl"),
                 Product.builder().naam("Kam").bezorgopties(productBezorglijsten3).productCategorie(ProductCategorie.DUIKBENODIGDHEDEN).soortArtikel(SoortArtikel.PRODUCT).prijs(0.90).build());
-
-
-
-
-    }
-
-    private void bezorgwijzeInDatabase () {
-        bezorgwijzeService.opslaan(
-                Bezorgwijze.builder().omschrijving("Afhalen magazijn").build());
-        bezorgwijzeService.opslaan(
-                Bezorgwijze.builder().omschrijving("Thuis afhalen bij verkoper").build());
-        bezorgwijzeService.opslaan(
-                Bezorgwijze.builder().omschrijving("Versturen").build());
-        bezorgwijzeService.opslaan(
-                Bezorgwijze.builder().omschrijving("Versturen onder rembours").build());
     }
 }
