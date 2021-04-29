@@ -35,7 +35,7 @@ public class RegistreerMenu implements  IMenu{
     private String emailadresOpgeven(){
         String emailadres = "";
         while (emailadres.isEmpty()) {
-            System.out.println("Wat is uw emailadres");
+            System.out.print("Wat is uw emailadres: ");
             emailadres = scanner.nextLine();
         }
         return emailadres;
@@ -55,7 +55,7 @@ public class RegistreerMenu implements  IMenu{
         return bezorgwijzeList;
     }
     private String adresOpvragen(List<Bezorgwijze> bezorgwijzen, Scanner scanner) {
-        System.out.println("Wat is uw adres: ");
+        System.out.print("Wat is uw adres: ");
         String adres = scanner.nextLine();
 
         while(thuisAfhalenIsGekozen(bezorgwijzen) && adres.isEmpty()) {
