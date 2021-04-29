@@ -46,11 +46,8 @@ public class GebruikersService {
         gebruikerDAO.voegProductToe(gebruiker, product);
         update(gebruiker);
     }
-    //@TODO hoort bij verwijder product
     public void verwijderProduct(Gebruiker gebruiker, Product product){
         gebruikerDAO.verwijderProduct(gebruiker, product);
-        //@TODO is dit echt nodig?
-        //update(gebruiker);
     }
 
     //Zoekmethodes
@@ -64,7 +61,6 @@ public class GebruikersService {
             return false;
         }
     }
-    //Alleen gebruiken als emailadres als true teruggegeven heeft
     public Gebruiker zoekGebruiker(String emailadres) {
         try {
             return gebruikerDAO.zoekEmailadres(emailadres);
@@ -73,6 +69,12 @@ public class GebruikersService {
             log.info("Het emailadres bestaat niet");
             return null;
         }
+    } //Alleen gebruiken als emailadres als true teruggegeven heeft
+    public List<Bezorgwijze> vindEigenBezorgWijzen(Gebruiker gebruiker) {
+        return gebruikerDAO.zoekEigenBezorgwijzen(gebruiker);
+    }
+    public List<Product> vindEigenProducten(Gebruiker gebruiker) {
+        return gebruikerDAO.zoekEigenProducten(gebruiker);
     }
 
     //Hulpmethodes
@@ -86,16 +88,7 @@ public class GebruikersService {
             return false;
         }
     }
-    //@TODO private zetten
-    public List<Bezorgwijze> vindEigenBezorgWijzen(Gebruiker gebruiker) {
-        return gebruikerDAO.zoekEigenBezorgwijzen(gebruiker);
-    }
-    //@TODO private zetten
-    public List<Product> vindEigenProducten(Gebruiker gebruiker) {
-        return gebruikerDAO.zoekEigenProducten(gebruiker);
-    }
-    //@TODO is dit een hulpmethode? zo ja op prive zetten
-    public void update(Gebruiker gebruiker) {
+    private void update(Gebruiker gebruiker) {
         gebruikerDAO.updateGebruiker(gebruiker);
     }
 }

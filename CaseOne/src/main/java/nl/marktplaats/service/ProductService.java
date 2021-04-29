@@ -4,10 +4,7 @@ import lombok.extern.log4j.Log4j2;
 import nl.marktplaats.data.ProductDAO;
 import nl.marktplaats.gedeeld.domeinmodel.Gebruiker;
 import nl.marktplaats.gedeeld.domeinmodel.Product;
-
 import javax.persistence.NoResultException;
-import javax.validation.constraints.Null;
-
 
 @Log4j2
 public class ProductService {
@@ -21,12 +18,8 @@ public class ProductService {
 
     //Methodes
     public void productTeKoopAanbieden(Gebruiker gebruiker, Product product) {
-        //@TODO weghalen omdat het lukt?
-        //gebruiker.voegProductToe(product);
         gebruikersService.voegProductToe(gebruiker, product);
     }
-
-    //@TODO uitbreiden met check op eigen product
     public void verwijderProduct(Gebruiker gebruiker, Product product) {
         try {
             if (isEigenProduct(gebruiker, product)) {
@@ -38,6 +31,7 @@ public class ProductService {
         }
     }
 
+    //Zoekmethodes
     public Product zoekProduct(int id) {
         try {
             return productDAO.zoek(id);
@@ -47,7 +41,6 @@ public class ProductService {
             return null;
         }
     }
-
 
     //Hulpmethodes
     private boolean isEigenProduct(Gebruiker gebruiker, Product product) {

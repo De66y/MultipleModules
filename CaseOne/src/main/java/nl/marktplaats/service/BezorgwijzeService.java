@@ -2,9 +2,6 @@ package nl.marktplaats.service;
 
 import nl.marktplaats.data.BezorgwijzeDAO;
 import nl.marktplaats.gedeeld.domeinmodel.Bezorgwijze;
-import nl.marktplaats.gedeeld.domeinmodel.Gebruiker;
-import nl.marktplaats.gedeeld.domeinmodel.Product;
-
 import java.util.List;
 
 public class BezorgwijzeService {

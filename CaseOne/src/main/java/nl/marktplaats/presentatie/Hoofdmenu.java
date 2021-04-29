@@ -161,7 +161,7 @@ public class Hoofdmenu implements IMenu, ISubMenu {
     }
     public void mijnProductVerwijderen() {
         mijnPoductenInzien();
-        System.out.println("Geef het nummer op van het product welke je wilt verwijderen: ");
+        System.out.print("Geef het nummer op van het product welke je wilt verwijderen: ");
         int keuze = scanner.nextInt();
         productService.verwijderProduct(gebruiker, productService.zoekProduct(keuze));
     }
