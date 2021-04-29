@@ -4,8 +4,8 @@ import lombok.Data;
 import nl.marktplaats.data.BezorgwijzeDAO;
 import nl.marktplaats.data.GebruikerDAO;
 import nl.marktplaats.data.ProductDAO;
-import nl.marktplaats.gedeeld.domeinhelper.ProductCategorie;
-import nl.marktplaats.gedeeld.domeinhelper.SoortArtikel;
+import nl.marktplaats.gedeeld.domeinmodel.helper.ProductCategorie;
+import nl.marktplaats.gedeeld.domeinmodel.helper.SoortArtikel;
 import nl.marktplaats.gedeeld.domeinmodel.Bezorgwijze;
 import nl.marktplaats.gedeeld.domeinmodel.Gebruiker;
 import nl.marktplaats.gedeeld.domeinmodel.Product;
@@ -34,12 +34,18 @@ public class Fabriek {
         return em;
     }
 
-    public void aanmakenDAOs() {
+    public void startOmgeving() {
+        aanmakenDAOs();
+        aanmakenServices();
+        startDataInDatabase();
+    }
+
+    private void aanmakenDAOs() {
         this.bezorgwijzeDAO = new BezorgwijzeDAO(em);
         this.gebruikerDAO = new GebruikerDAO(em);
         this.productDAO = new ProductDAO(em);
     }
-    public void aanmakenServices() {
+    private void aanmakenServices() {
         this.bezorgwijzeService = new BezorgwijzeService(bezorgwijzeDAO);
         this.gebruikersService = new GebruikersService(gebruikerDAO);
         this.productService = new ProductService(productDAO, gebruikersService);
@@ -55,7 +61,7 @@ public class Fabriek {
         bezorgwijzeService.opslaan(
                 Bezorgwijze.builder().omschrijving("Versturen onder rembours").build());
     }
-    public void startDataInDatabase() {
+    private void startDataInDatabase() {
         bezorgwijzeInDatabase();
 
         //Gebruiker 1
@@ -65,9 +71,7 @@ public class Fabriek {
         bezorgwijzenAdmin.add(bezorgwijzeService.alleBezorgwijzen().get(2));
         bezorgwijzenAdmin.add(bezorgwijzeService.alleBezorgwijzen().get(3));
 
-        Gebruiker admin = Gebruiker.builder().emailadres("admin").wachtwoord("admin").build();
-        admin.setBezorgwijzen(bezorgwijzenAdmin);
-
+        Gebruiker admin = Gebruiker.builder().emailadres("admin").wachtwoord("admin").akkoordReglement("J").bezorgwijzen(bezorgwijzenAdmin).build();
         gebruikerDAO.opslaan(admin);
 
         List<Bezorgwijze> productBezorgwijzen = new ArrayList<>();

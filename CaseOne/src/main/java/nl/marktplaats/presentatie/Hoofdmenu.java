@@ -1,8 +1,8 @@
 package nl.marktplaats.presentatie;
 
 import lombok.extern.log4j.Log4j2;
-import nl.marktplaats.gedeeld.domeinhelper.ProductCategorie;
-import nl.marktplaats.gedeeld.domeinhelper.SoortArtikel;
+import nl.marktplaats.gedeeld.domeinmodel.helper.ProductCategorie;
+import nl.marktplaats.gedeeld.domeinmodel.helper.SoortArtikel;
 import nl.marktplaats.gedeeld.domeinmodel.Bezorgwijze;
 import nl.marktplaats.gedeeld.domeinmodel.Gebruiker;
 import nl.marktplaats.gedeeld.domeinmodel.Product;

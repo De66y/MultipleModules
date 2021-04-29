@@ -1,4 +1,4 @@
-package nl.marktplaats.gedeeld.domeinhelper;
+package nl.marktplaats.gedeeld.domeinmodel.helper;
 
 public interface IProduct extends IArtikel {
     ProductCategorie getProductCategorie();

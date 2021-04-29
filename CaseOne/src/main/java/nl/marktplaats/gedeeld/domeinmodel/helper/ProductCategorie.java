@@ -1,4 +1,4 @@
-package nl.marktplaats.gedeeld.domeinhelper;
+package nl.marktplaats.gedeeld.domeinmodel.helper;
 
 public enum ProductCategorie {
     BOEKEN (1),

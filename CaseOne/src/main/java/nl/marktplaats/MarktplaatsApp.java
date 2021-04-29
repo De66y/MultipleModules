@@ -8,13 +8,9 @@ import java.util.Scanner;
 public class MarktplaatsApp {
 
     public static void main(String[] args) {
-        //Start van de applicatie
         Fabriek fabriek = new Fabriek();
-        fabriek.aanmakenDAOs();
-        fabriek.aanmakenServices();
-        fabriek.startDataInDatabase();
+        fabriek.startOmgeving();
 
-        //Officiële start
         new AanmeldMenu(fabriek).showMenu(new Scanner(System.in));
     }
 }
