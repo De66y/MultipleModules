@@ -59,7 +59,7 @@ public class RegistreerMenu implements  IMenu{
         String adres = scanner.nextLine();
 
         while(thuisAfhalenIsGekozen(bezorgwijzen) && adres.isEmpty()) {
-            System.out.println("Wat is uw adres: ");
+            System.out.print("Wat is uw adres: ");
             adres = scanner.nextLine();
         }
         return adres;
