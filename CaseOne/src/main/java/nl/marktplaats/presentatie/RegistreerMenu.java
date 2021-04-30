@@ -25,7 +25,7 @@ public class RegistreerMenu implements  IMenu{
     public void showMenu(Scanner scanner) {
         String emailadres = emailadresOpgeven();
 
-        if (gebruikersService.emailadresBestaat(emailadres)) showMenu(new Scanner(System.in));
+        while(gebruikersService.emailadresBestaat(emailadres)) emailadres=emailadresOpgeven();
 
         List<Bezorgwijze> bezorgwijzen = bezorgwijzenKiezen();
         String adres = adresOpvragen(bezorgwijzen, new Scanner(System.in));
