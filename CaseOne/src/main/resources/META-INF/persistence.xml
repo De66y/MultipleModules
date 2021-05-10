@@ -14,6 +14,7 @@
 
             <property name="hibernate.hbm2ddl.auto" value="create"/>
             <!--<property name="hibernate.show_sql" value="true"/> UITZETTEN VOOR DE DEMO-->
+            <property name="hibernate.show_sql" value="true"/>
             <property name="hibernate.format_sql" value="true"/>
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect"/>
         </properties>

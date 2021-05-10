@@ -45,6 +45,7 @@
 
         <Root level="DEBUG">
             <!--<AppenderRef ref="console"/> UITZETTEN VOOR DE DEMO-->
+            <AppenderRef ref="console"/>
             <AppenderRef ref="rollingFile"/>
         </Root>
 
