@@ -13,7 +13,9 @@
         <module>BankApp</module>
         <module>Blok1Java</module>
         <module>Blok2Database</module>
+        <module>Blok3Frontend</module>
         <module>CaseOne</module>
+
     </modules>
 
     <!-- Hieronder kun je ook variabelen declareren welke ook voor onderliggende poms beschikbaar zijn -->
