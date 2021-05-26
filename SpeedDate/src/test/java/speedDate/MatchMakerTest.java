@@ -4,6 +4,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import speedDate.logic.MatchMaker;
+import speedDate.model.Match;
+import speedDate.model.Person;
 
 import java.util.ArrayList;
 import java.util.List;

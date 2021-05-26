@@ -1,4 +1,7 @@
-package speedDate;
+package speedDate.logic;
+
+import speedDate.model.Match;
+import speedDate.model.Person;
 
 import java.util.ArrayList;
 import java.util.List;

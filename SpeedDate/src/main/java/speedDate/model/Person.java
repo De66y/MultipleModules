@@ -1,4 +1,4 @@
-package speedDate;
+package speedDate.model;
 
 import java.util.ArrayList;
 import java.util.List;

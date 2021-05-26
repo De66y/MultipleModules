@@ -1,4 +1,6 @@
-package speedDate;
+package speedDate.console;
+
+import speedDate.model.Person;
 
 import java.util.ArrayList;
 import java.util.List;

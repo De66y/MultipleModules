@@ -1,4 +1,4 @@
-package speedDate;
+package speedDate.model;
 
 public class Match {
     private Person person1;
