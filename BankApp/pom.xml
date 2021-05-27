@@ -21,7 +21,7 @@
     </dependencies>
 
 
-    <!-- Surfire update + Pitest plugin -->
+    <!-- Surfire update + Pitest plugin
     <build>
         <plugins>
             <plugin>
@@ -33,7 +33,7 @@
                 <artifactId>pitest-maven</artifactId>
             </plugin>
         </plugins>
-    </build>
+    </build> -->
 
 
 </project>

@@ -16,14 +16,87 @@
         <failOnMissingWebXml>false</failOnMissingWebXml>
     </properties>
 
+    <dependencyManagement>
+        <dependencies>
+            <!--Stap 1 Arquillian:-->
+            <dependency>
+                <groupId>org.jboss.arquillian</groupId>
+                <artifactId>arquillian-bom</artifactId> <!-- Bill of Materials. Lijst met allemaal dependencies, daarom staat dit ook in dependencymanagement-->
+                <version>1.6.0.Final</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <dependencies>
         <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-api</artifactId>
-            <version>7.0</version>
-            <scope>provided</scope>
+        </dependency>
+
+        <!-- Stap 2 Arquillian: Arquillian JUnit integration framework (required at all times) -->
+        <dependency>
+            <groupId>org.jboss.arquillian.junit</groupId>
+            <artifactId>arquillian-junit-container</artifactId>
+            <scope>test</scope>
+            <!--version scope already provided in the BOM-->
+        </dependency>
+        <!-- Stap 3 Arquillian: Arquillian container adapter for the target container-->
+        <!-- container can be either: embedded, managed or remote -->
+        <dependency>
+            <groupId>io.openliberty.arquillian</groupId>
+            <artifactId>arquillian-liberty-managed</artifactId>
+            <version>1.0.6</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!--Stap 4 Arquillian: JUnit 4. Vreemd dat ik hier version en scope moet noemen. Deze staat eigenlijk al in de bom -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.13.2</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
+
+    <!-- Stap 5 Arquillian: 2 plugins voor het bouwen van een tweede server voor Arquillian-->
+    <build>
+        <plugins>
+            <!-- Run and verify ...IT.java-tests -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>2.22.2</version>
+            </plugin>
+            <!-- Download WebSphere Liberty to target directory and start it -->
+            <!-- See test/resources/arquillian.xml and server.xml for configuration -->
+            <plugin>
+                <groupId>net.wasdev.wlp.maven.plugins</groupId>
+                <artifactId>liberty-maven-plugin</artifactId>
+                <version>3.0.M1</version>
+                <configuration>
+                    <assemblyArtifact>
+                        <!-- Liberty server to run test against -->
+                        <groupId>io.openliberty</groupId>
+                        <artifactId>openliberty-runtime</artifactId>
+                        <version>20.0.0.12</version>
+                        <type>zip</type>
+                    </assemblyArtifact>
+                    <configFile>src/test/resources/server.xml</configFile> <!-- Used to run Arquillian-->
+                </configuration>
+                <executions>
+                    <!-- Create server during package phase for running the application AND Arquillian -->
+                    <execution>
+                        <phase>pre-integration-test</phase>
+                        <goals>
+                            <goal>create-server</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+        </plugins>
+    </build>
 
 </project>
