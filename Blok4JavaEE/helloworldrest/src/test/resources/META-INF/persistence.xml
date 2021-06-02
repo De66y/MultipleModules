@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence
+             http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd"
+             version="2.2">
+
+    <persistence-unit name="H2-hrm-test" transaction-type="JTA"> <!-- Java Transaction API -->
+        <!-- onderstaande kan uit: wordt automatisch geladen, omdat hibernate op classpath (in pom) staat. -->
+        <!-- <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider> -->
+        <jta-data-source>jdbc/h2</jta-data-source>
+
+        <!--<validation-mode>AUTO</validation-mode>-->
+        <properties>
+            <!-- onderstaande kan uit: wordt automatisch geladen, omdat mysql op classpath (in pom) staat. -->
+            <!-- <property name="javax.persistence.jdbc.driver" value="iets van h2"/> -->
+            <!-- connection properties URL user password: now in server.xml  -->
+            <property name="eclipselink.ddl-generation" value="create-or-extend-tables"/>
+            <!-- h2 dialect nog specificeren? -->
+        </properties>
+    </persistence-unit>
+</persistence>

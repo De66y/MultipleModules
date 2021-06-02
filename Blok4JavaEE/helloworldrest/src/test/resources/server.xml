@@ -9,4 +9,13 @@
 
     <httpEndpoint id="defaultHttpEndpoint" httpPort="9081" httpsPort="9444"/>
 
+    <!-- H2 for arquillian integration tests -->
+    <dataSource id="h2test" jndiName="jdbc/h2"> <!-- must start with jdbc/ -->
+        <jdbcDriver libraryRef="H2Lib"/>
+        <properties URL="jdbc:h2:mem:testdb" user="sa" password=""/>
+    </dataSource>
+
+    <library id="H2Lib">
+        <file name="${wlp.install.dir}/usr/shared/config/lib/h2.jar"/> <!--staat op het classpath van de server-->
+    </library>
 </server>

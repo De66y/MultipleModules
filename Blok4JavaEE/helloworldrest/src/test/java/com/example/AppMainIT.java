@@ -36,8 +36,8 @@ public class AppMainIT {
                 // .addClass(App.class) // dont forget! // selectively add classes
                 // .addClass(ContactsResource.class)
                 // .addClass(Contact.class)
-                .addAsWebInfResource("test-beans.xml", "beans.xml"); // to activate CDI
-        // .addAsResource("test-persistence.xml", "META-INF/persistence.xml")
+                .addAsWebInfResource("test-beans.xml", "beans.xml") // to activate CDI
+                .addAsResource("test-persistence.xml", "META-INF/persistence.xml");
         //.addAsLibraries(pomDependency("org.apache.logging.log4j", "log4j-slf4j-impl")); Voor logger, die gebruik ik niet in de app dus deze is voor nu niet nodig.
         System.out.println(warFilled.toString(true));
         return warFilled;
