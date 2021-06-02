@@ -5,7 +5,7 @@ import javax.ws.rs.GET;
 public class BookRes {
 
     @GET
-    public String test() {
+    public String getBookById() {
         return "Ik ben in SUBRECROUSE";
     }
 }

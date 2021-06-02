@@ -38,8 +38,8 @@ public class BooksRes {
         //return new BookRes().getById(id);
     }*/
 
-    @Path ("sub")
-    public BookRes getBookRes() {
+    @Path ("{id}")
+    public BookRes getBookRes(@PathParam("id") int id) {
         return new BookRes();
     }
 
