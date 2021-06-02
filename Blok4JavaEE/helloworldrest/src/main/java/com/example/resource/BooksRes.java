@@ -29,18 +29,8 @@ public class BooksRes {
 
     //..../books/1
     //Niet annoteren met http methodes zoals get/post/put/patch/delete enz.
-/*    @Path("{id}")
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    public Book getBookById(@PathParam("id") int id) {
-        Optional<Book> book = bookDao.findBookById(id);
-        return book == null? null: book.get();
-        //return new BookRes().getById(id);
-    }*/
-
     @Path ("{id}")
     public BookRes getBookRes(@PathParam("id") int id) {
-
         return new BookRes();
     }
 
