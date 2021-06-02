@@ -1,11 +1,14 @@
 package com.example.resource;
 
-import javax.ws.rs.GET;
+import com.example.util.JsonRes;
 
-public class BookRes {
+import javax.ws.rs.GET;
+import javax.ws.rs.PathParam;
+
+public class BookRes implements JsonRes {
 
     @GET
-    public String getBookById() {
-        return "Ik ben in SUBRECROUSE";
+    public String getBookById(@PathParam("id") int id) {
+        return "Ik ben in SUBRECROUSE met id" + id;
     }
 }
