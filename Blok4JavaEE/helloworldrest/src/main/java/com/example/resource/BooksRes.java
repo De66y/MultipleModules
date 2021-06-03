@@ -1,6 +1,7 @@
 package com.example.resource;
 
 import com.example.data.BookDao;
+import com.example.data.IBookDao;
 import com.example.model.Book;
 
 import javax.inject.Inject;
@@ -12,19 +13,19 @@ import java.util.List;
 public class BooksRes {
 
     @Inject
-    private BookDao bookDao;
+    private IBookDao iBookDao;
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<Book> getAll(@QueryParam("title") String zoekWoord) {
-        return bookDao.getAllBooks();
+        return iBookDao.getAllBooks();
     }
 
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Book addBook(Book book) {
-        return bookDao.addBook(book);
+        return iBookDao.addBook(book);
     }
 
     //..../books/1

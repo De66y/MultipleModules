@@ -1,6 +1,7 @@
 package com.example.data;
 
 import com.example.model.Book;
+import com.example.resource.BookRes;
 
 import javax.ejb.*;
 import javax.persistence.EntityManager;
@@ -15,7 +16,7 @@ import java.util.Optional;
 // de class kan dus ook beter geen data-fields bevatten (dat heeft geen zin)!
 @TransactionManagement(TransactionManagementType.CONTAINER)
 // = default; whole annotation can be omitted when choosing CONTAINER
-public class BookDao {
+public class BookDao implements IBookDao{
 
     // STATE: doesn't make sense in Stateless EJB.
     // private String name;
@@ -36,8 +37,8 @@ public class BookDao {
         return book;
     }
 
-    public Optional<Book> findBookById(int id) {
-        return Optional.of(em.find(Book.class, id));
+    public Book findBookById(int id) {
+      return new Book(2, "Hard gecodeerd boek", "uit de DAO", "");
     }
 
 }
