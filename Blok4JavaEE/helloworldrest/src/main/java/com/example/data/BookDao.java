@@ -37,8 +37,8 @@ public class BookDao implements IBookDao{
         return book;
     }
 
-    public Book findBookById(int id) {
-        return em.find(Book.class, id);
+    public Optional<Book> findBookById(int id) {
+        return Optional.ofNullable(em.find(Book.class, id));
       //return new Book(2, "Hard gecodeerd boek", "uit de DAO", "");
     }
 
