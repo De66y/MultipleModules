@@ -15,6 +15,9 @@ public class BooksRes {
     @Inject
     private IBookDao iBookDao;
 
+    @Inject
+    private BookRes bookRes;
+
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<Book> getAll(@QueryParam("title") String zoekWoord) {
@@ -32,7 +35,7 @@ public class BooksRes {
     //Niet annoteren met http methodes zoals get/post/put/patch/delete enz.
     @Path ("{id}")
     public BookRes getBookRes(@PathParam("id") int id) {
-        return new BookRes();
+        return bookRes;
     }
 
 

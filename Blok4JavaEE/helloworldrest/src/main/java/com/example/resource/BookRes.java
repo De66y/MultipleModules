@@ -14,7 +14,7 @@ public class BookRes implements JsonRes {
 
     @GET
     public Book getBookById(@PathParam("id") int id) {
-        return new Book(2, "verzinsel", "verzinsel", "verzinsel");
-        //return bookDao.findBookById(id).;
+        //return new Book(id, "verzinsel", "verzinsel", "verzinsel");
+        return iBookDao.findBookById(id);
     }
 }

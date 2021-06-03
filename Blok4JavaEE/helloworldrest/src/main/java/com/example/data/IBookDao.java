@@ -8,5 +8,6 @@ public interface IBookDao {
 
     List<Book> getAllBooks();
     Book addBook(Book book);
+    Book findBookById(int id);
 
 }
