@@ -38,7 +38,8 @@ public class BookDao implements IBookDao{
     }
 
     public Book findBookById(int id) {
-      return new Book(2, "Hard gecodeerd boek", "uit de DAO", "");
+        return em.find(Book.class, id);
+      //return new Book(2, "Hard gecodeerd boek", "uit de DAO", "");
     }
 
 }
